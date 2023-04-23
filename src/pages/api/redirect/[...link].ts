@@ -8,7 +8,7 @@ export default async function middleware(req: NextApiRequest, res: NextApiRespon
     const findedLink = await Api(`/links/${link}`)
     res.redirect(findedLink.data.link).end()
   } catch (error: any) {
-    res.status(error.response.status).json(error.response.data)
+    res.redirect("/admin")
   }
 
 }
