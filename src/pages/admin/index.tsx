@@ -1,4 +1,4 @@
-import { Edit, ChevronUp } from "lucide-react";
+import { Edit, ChevronUp, Loader } from "lucide-react";
 import LinkElement from "../elements/LinkElement";
 import Head from "next/head";
 import { useEffect, useRef, useState } from "react";
@@ -86,9 +86,7 @@ export default function Admin() {
             </div>
 
             <div id="links-list" className="flex-auto w-full overflow-y-scroll pr-3">
-              <ul className="space-y-3">
-                {(!linksLoaded || linkList.length == 0) ? <span>Carregando...</span> : linkList.map(l => <LinkElement key={l["_id"]} nome={l.name} link={l.link} />)}
-              </ul>
+                {(!linksLoaded || linkList.length == 0) ? <div className="h-full w-full flex justify-center items-center gap-3"><Loader/><span>Carregando...</span></div> : loadLinksTable(linkList)}
             </div>
 
             <button type="button" className="self-end bg-yellow-600 rounded-xl p-2 border-2 border-yellow-600 hover:bg-yellow-600/30 transition-colors ease-in duration-100">salvar alterações</button>
@@ -97,5 +95,13 @@ export default function Admin() {
       </div>
 
     </div>
+  )
+}
+
+function loadLinksTable(linkList: [{ "_id": string, name: string, link: string }] | []) {
+  return(
+    <ul className="space-y-3">
+      {linkList.map(l => <LinkElement key={l["_id"]} nome={l.name} link={l.link} />)}
+    </ul>
   )
 }
