@@ -8,6 +8,9 @@ export default function Admin() {
   const [linkList, setLinkList] = useState<[{ "_id": string, name: string, link: string }] | []>([])
   let linksLoaded = useRef(false);
 
+  const [linkName, setLinkName] = useState("")
+  const [link, setLink] = useState("")
+
   useEffect(() => {
     if (!linksLoaded.current) {
       fetchLinks()
@@ -22,8 +25,17 @@ export default function Admin() {
     })
   }
 
+  const createLink = () => {
+    if (!linkName.trim() || !link.trim()) return;
+
+    axios.post("/api/links", { 
+      name: linkName.trim(),
+      link: link.trim()
+    }).then(() => fetchLinks())
+  }
+
   return (
-    <div id="container" className="box-border flex h-screen text-zinc-300 ">
+    <div id="container" className="box-border flex h-screen text-white ">
       <Head>
         <title>Admin | Bautitz</title>
       </Head>
@@ -57,9 +69,9 @@ export default function Admin() {
           <div id="links-container" className="min-w-[600px] max-w-[1000px] w-4/5 p-6  h-5/6 border-2 border-neutral-900 rounded-xl flex flex-col space-y-6">
 
             <div id="links-add" className="space-x-3 flex">
-              <input type="text" placeholder="nome" className="w-36 p-2 rounded-xl border-2 border-neutral-900 bg-transparent" />
-              <input type="text" placeholder="link" className="flex-auto p-2 rounded-xl border-2 border-neutral-900 bg-transparent" />
-              <button type="button" onClick={fetchLinks} className="bg-sky-600 rounded-xl p-2 border-2 border-sky-600 hover:bg-sky-600/30 transition-colors ease-in duration-100">adicionar</button>
+              <input type="text" onChange={(e) => setLinkName(e.target.value)} placeholder="nome" className="w-36 p-2 rounded-xl border-2 border-neutral-900 bg-transparent" />
+              <input type="text" onChange={(e) => setLink(e.target.value)} placeholder="link" className="flex-auto p-2 rounded-xl border-2 border-neutral-900 bg-transparent" />
+              <button type="button" onClick={createLink} className="bg-sky-600 rounded-xl p-2 border-2 border-sky-600 hover:bg-sky-600/30 transition-colors ease-in duration-100">adicionar</button>
             </div>
 
             <div id="links-list" className="flex-auto w-full overflow-y-scroll pr-3">

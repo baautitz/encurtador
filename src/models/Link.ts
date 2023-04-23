@@ -1,8 +1,14 @@
 import mongoose, { Schema } from "mongoose"
 
 const LinkSchema = new Schema({
-    name: String,
-    link: String,
+    name: {
+        type: String,
+        required: true
+    },
+    link: {
+        type: String,
+        required: true
+    },
     author: String,
 }, { timestamps: true })
 
