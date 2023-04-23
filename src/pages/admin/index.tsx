@@ -8,8 +8,11 @@ export default function Admin() {
   const [linkList, setLinkList] = useState<[{ "_id": string, name: string, link: string }] | []>([])
   let linksLoaded = useRef(false);
 
-  const [linkName, setLinkName] = useState("")
-  const [link, setLink] = useState("")
+  // const [linkName, setLinkName] = useState("")
+  // const [link, setLink] = useState("")
+
+  const linkNameInput = useRef<any>(null)
+  const linkInput = useRef<any>(null)
 
   useEffect(() => {
     if (!linksLoaded.current) {
@@ -26,13 +29,21 @@ export default function Admin() {
   }
 
   const createLink = () => {
-    if (!linkName.trim() || !link.trim()) return;
+    const linkNameValue = linkNameInput.current.value
+    const linkValue = linkInput.current.value
+    if (!linkNameValue.trim() || !linkValue.trim()) return;
 
     axios.post("/api/links", { 
-      name: linkName.trim(),
-      link: link.trim()
-    }).then(() => fetchLinks())
+      name: linkNameValue.trim(),
+      link: linkValue.trim()
+    }).then(() => {
+      fetchLinks()
+      linkNameInput.current.value = ""
+      linkInput.current.value = ""
+    })
   }
+
+  //onChange={(e) => setLink(e.target.value)}
 
   return (
     <div id="container" className="box-border flex h-screen text-white ">
@@ -69,8 +80,8 @@ export default function Admin() {
           <div id="links-container" className="min-w-[600px] max-w-[1000px] w-4/5 p-6  h-5/6 border-2 border-neutral-900 rounded-xl flex flex-col space-y-6">
 
             <div id="links-add" className="space-x-3 flex">
-              <input type="text" onChange={(e) => setLinkName(e.target.value)} placeholder="nome" className="w-36 p-2 rounded-xl border-2 border-neutral-900 bg-transparent" />
-              <input type="text" onChange={(e) => setLink(e.target.value)} placeholder="link" className="flex-auto p-2 rounded-xl border-2 border-neutral-900 bg-transparent" />
+              <input type="text" ref={linkNameInput}  placeholder="nome" className="w-36 p-2 rounded-xl border-2 border-neutral-900 bg-transparent" />
+              <input type="text" ref={linkInput}  placeholder="link" className="flex-auto p-2 rounded-xl border-2 border-neutral-900 bg-transparent" />
               <button type="button" onClick={createLink} className="bg-sky-600 rounded-xl p-2 border-2 border-sky-600 hover:bg-sky-600/30 transition-colors ease-in duration-100">adicionar</button>
             </div>
 
