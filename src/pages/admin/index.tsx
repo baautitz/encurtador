@@ -16,6 +16,7 @@ export default function Admin() {
   }, [])
 
   const fetchLinks = () => {
+    setLinkList([])
     axios("/api/links").then(res => {
       setLinkList(res.data)
     })
@@ -58,12 +59,12 @@ export default function Admin() {
             <div id="links-add" className="space-x-3 flex">
               <input type="text" placeholder="nome" className="w-36 p-2 rounded-xl border-2 border-neutral-900 bg-transparent" />
               <input type="text" placeholder="link" className="flex-auto p-2 rounded-xl border-2 border-neutral-900 bg-transparent" />
-              <button type="button" className="bg-sky-600 rounded-xl p-2 border-2 border-sky-600 hover:bg-sky-600/30 transition-colors ease-in duration-100">adicionar</button>
+              <button type="button" onClick={fetchLinks} className="bg-sky-600 rounded-xl p-2 border-2 border-sky-600 hover:bg-sky-600/30 transition-colors ease-in duration-100">adicionar</button>
             </div>
 
             <div id="links-list" className="flex-auto w-full overflow-y-scroll pr-3">
               <ul className="space-y-3">
-                {(!linksLoaded ? <span>Loading...</span> : linkList.map(l => <LinkElement key={l["_id"]} nome={l.name} link={l.link} />))}
+                {(!linksLoaded || linkList.length == 0) ? <span>Loading...</span> : linkList.map(l => <LinkElement key={l["_id"]} nome={l.name} link={l.link} />)}
               </ul>
             </div>
 
