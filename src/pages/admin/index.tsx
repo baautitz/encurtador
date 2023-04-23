@@ -1,17 +1,17 @@
 import { Edit, ChevronUp } from "lucide-react";
 import LinkElement from "../elements/LinkElement";
 import Head from "next/head";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 
 export default function Admin() {
   const [linkList, setLinkList] = useState<[{name: string, link: string}] | []>([])
-  let linksLoaded = false;
+  let linksLoaded = useRef(true);
 
   useEffect(() => {
-    if (!linksLoaded) {
+    if (!linksLoaded.current) {
       fetchLinks()
-      linksLoaded = true;
+      linksLoaded.current = true;
     }
   }, [])
 
