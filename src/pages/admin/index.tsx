@@ -52,7 +52,7 @@ export default function Admin() {
         <title>Admin | Bautitz</title>
       </Head>
 
-      {/* <SidebarElement/> */}
+      <SidebarElement/>
 
       <div id="main-container" className="flex-auto px-6 flex flex-col bg-black overflow-y-auto">
         <div className="flex-auto flex flex-col justify-center items-center min-w-[600px] min-h-[600px] space-y-3">
