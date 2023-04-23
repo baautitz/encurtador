@@ -76,7 +76,7 @@ export default function Admin() {
 
             <div id="links-list" className="flex-auto w-full overflow-y-scroll pr-3">
               <ul className="space-y-3">
-                {(!linksLoaded || linkList.length == 0) ? <span>Loading...</span> : linkList.map(l => <LinkElement key={l["_id"]} nome={l.name} link={l.link} />)}
+                {(!linksLoaded || linkList.length == 0) ? <span>Carregando...</span> : linkList.map(l => <LinkElement key={l["_id"]} nome={l.name} link={l.link} />)}
               </ul>
             </div>
 
