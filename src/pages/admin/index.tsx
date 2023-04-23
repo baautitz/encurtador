@@ -1,10 +1,32 @@
 import { Edit, ChevronUp } from "lucide-react";
 import LinkElement from "../elements/LinkElement";
+import Head from "next/head";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function Admin() {
+  const [linkList, setLinkList] = useState<[{name: string, link: string}] | []>([])
+  let linksLoaded = false;
+
+  useEffect(() => {
+    if (!linksLoaded) {
+      fetchLinks()
+      linksLoaded = true;
+    }
+  }, [])
+
+  const fetchLinks = () => {
+    axios("/api/links").then(res => {
+      setLinkList(res.data)
+    })
+  }
+
   return (
     <div id="container" className="box-border flex h-screen text-zinc-300 ">
-
+      <Head>
+        <title>Admin | Bautitz</title>
+      </Head>
+    
       <div id="sidebar-container" className="flex-none w-72 bg-black border-r-2 border-neutral-900 p-6 overflow-y-auto">
 
         <div className="flex flex-col h-full min-h-[180px]">
@@ -41,7 +63,7 @@ export default function Admin() {
 
             <div id="links-list" className="flex-auto w-full overflow-y-scroll pr-3">
               <ul className="space-y-3">
-                 <LinkElement />
+                 {(linksLoaded ? <span>Loading</span> : linkList.map(l => <LinkElement nome={l.name} link={l.link}/>))}
               </ul>
             </div>
 
