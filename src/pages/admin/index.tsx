@@ -1,7 +1,7 @@
 import { Edit, ChevronUp } from "lucide-react";
 import LinkElement from "../elements/LinkElement";
 
-export default function Home() {
+export default function Admin() {
   return (
     <div id="container" className="box-border flex h-screen text-zinc-300 ">
 
