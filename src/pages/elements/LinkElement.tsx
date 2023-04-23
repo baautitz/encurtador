@@ -1,5 +1,3 @@
-"use client"
-
 function LinkElement(props: { key: string, nome: string, link: string }) {
     return (
         <li className="space-x-3 flex">
