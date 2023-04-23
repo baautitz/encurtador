@@ -5,8 +5,8 @@ import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 
 export default function Admin() {
-  const [linkList, setLinkList] = useState<[{name: string, link: string}] | []>([])
-  let linksLoaded = useRef(true);
+  const [linkList, setLinkList] = useState<[{ "_id": string, name: string, link: string }] | []>([])
+  let linksLoaded = useRef(false);
 
   useEffect(() => {
     if (!linksLoaded.current) {
@@ -26,7 +26,7 @@ export default function Admin() {
       <Head>
         <title>Admin | Bautitz</title>
       </Head>
-    
+
       <div id="sidebar-container" className="flex-none w-72 bg-black border-r-2 border-neutral-900 p-6 overflow-y-auto">
 
         <div className="flex flex-col h-full min-h-[180px]">
@@ -63,7 +63,7 @@ export default function Admin() {
 
             <div id="links-list" className="flex-auto w-full overflow-y-scroll pr-3">
               <ul className="space-y-3">
-                 {(linksLoaded ? <span>Loading</span> : linkList.map(l => <LinkElement nome={l.name} link={l.link}/>))}
+                {(!linksLoaded ? <span>Loading...</span> : linkList.map(l => <LinkElement key={l["_id"]} nome={l.name} link={l.link} />))}
               </ul>
             </div>
 
