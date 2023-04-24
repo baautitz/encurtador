@@ -1,6 +1,6 @@
 import axios from "axios"
 
-function LinkElement(props: { key: string, nome: string, link: string, onDelete: any[] }) {
+function LinkElement(props: { key: string, id: string, nome: string, link: string, onDelete: any[] }) {
     const deleteLink = () => {
         props.onDelete[0](props.nome)
         axios.delete(`/api/links/${props.nome}`).then(() => {

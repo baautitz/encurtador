@@ -9,7 +9,6 @@ export default async function middleware(req: NextApiRequest, res: NextApiRespon
   const link = decodeURI(req.url!.replace("/api/links/", ""))
   const findedLink = (await Link.find({ name: link }))[0]
   
-
   if (!findedLink) {
     res.status(404).json({ error: `Link '${link}' not found.` })
     return;
@@ -24,7 +23,6 @@ export default async function middleware(req: NextApiRequest, res: NextApiRespon
       res.status(200).json({ message: `Link '${findedLink.name}' deleted.` })
     }
     catch (error: any) {
-      console.log(error)
       res.status(400).json(error)
     }
   }

@@ -33,7 +33,7 @@ export default function Admin() {
     let linkNameValue = linkNameInput.current.value
     const linkValue = linkInput.current.value
 
-    const rg = /([A-Za-z0-9].*)/g
+    const rg = /([A-Za-z0-9][A-Za-z0-9/]*)/g
     linkNameValue = (linkNameValue.match(rg)) ? linkNameValue.match(rg)[0] : ""
 
     if (!linkNameValue.trim() || !linkValue.trim()) return;
@@ -110,7 +110,7 @@ function loadLinksList(linksLoaded: boolean, linkList: [{ "_id": string, name: s
 
   return (
     <ul className="space-y-3">
-      {linkList.map(l => <LinkElement key={l.name} nome={l.name} link={l.link} onDelete={onDelete} />)}
+      {linkList.map(l => <LinkElement key={l.name} id={l["_id"]} nome={l.name} link={l.link} onDelete={onDelete} />)}
     </ul>
   )
 }
