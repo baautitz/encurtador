@@ -1,15 +1,14 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 import dbConnection from '../../../services/DbConnection'
-import Link from '../../../models/Link'
-import { AwardIcon } from 'lucide-react'
+import Link from '../../../models/Link' 
 
 dbConnection()
 
 export default async function middleware(req: NextApiRequest, res: NextApiResponse) {
     switch (req.method) {
         case "GET":
-            const findedLinks = await Link.find({})
+            const findedLinks = await Link.find({}).sort({ createdAt: -1 })
             res.status(200).json(findedLinks)
             break
         case "POST":
