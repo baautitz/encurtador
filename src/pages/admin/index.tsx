@@ -6,7 +6,7 @@ import axios from "axios";
 import SidebarElement from "../elements/SidebarElement";
 
 export default function Admin() {
-  const [linkList, setLinkList] = useState<[{ "_id": string, name: string, link: string }] | []>([])
+  const [linkList, setLinkList] = useState<any>([])
   let linksLoaded = useRef(false);
 
   const linkNameInput = useRef<any>(null)
@@ -49,7 +49,13 @@ export default function Admin() {
     })
   }
 
-  const onDeleteLink = () => fetchLinks()
+  const onDeleteUpdateLinks = (name: string) => {
+    setLinkList(linkList.filter((l: { name: any; }) => name != l.name))
+  }
+
+  const onDeleteLinkFetchLinks = () => {
+    fetchLinks()
+  }
 
   return (
     <div id="container" className="box-border flex h-screen text-white ">
@@ -75,7 +81,7 @@ export default function Admin() {
             </form>
 
             <div id="links-list" className="flex-auto w-full overflow-y-scroll pr-3">
-              {loadLinksList(linksLoaded.current, linkList, onDeleteLink)}
+              {loadLinksList(linksLoaded.current, linkList, [onDeleteUpdateLinks, onDeleteLinkFetchLinks])}
             </div>
 
             <button type="button" className="self-end bg-yellow-500 rounded-xl p-2 border-2 border-yellow-500 hover:bg-yellow-600/30 transition-colors ease-in duration-100">salvar alterações</button>
@@ -87,7 +93,7 @@ export default function Admin() {
   )
 }
 
-function loadLinksList(linksLoaded: boolean, linkList: [{ "_id": string, name: string, link: string }] | [], onDelete: any) {
+function loadLinksList(linksLoaded: boolean, linkList: [{ "_id": string, name: string, link: string }] | [], onDelete: any[]) {
   if (!linksLoaded || linkList.length == 0) {
     return (
       <div className="h-full w-full flex justify-center items-center gap-3">
