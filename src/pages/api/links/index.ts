@@ -16,12 +16,12 @@ export default async function middleware(req: NextApiRequest, res: NextApiRespon
             break
         case "POST":
             try {
-                const rg = /(['^A-Za-z0-9].*)/g
+                const rg = /([A-Za-z0-9].*)/g
             
                 name = name.replaceAll(" ", "")
                 link = link.replaceAll(" ", "")
-            
-                name = name.match(rg)[0]
+
+                name = (name.match(rg)) ? name.match(rg)[0] : ""
 
                 const createdLink = await Link.create({ name, link })
                 res.status(201).json({ message: "Created", createdLink })

@@ -33,14 +33,12 @@ export default function Admin() {
     let linkNameValue = linkNameInput.current.value
     const linkValue = linkInput.current.value
 
-    const rg = /(['^A-Za-z0-9].*)/g
+    const rg = /([A-Za-z0-9].*)/g
     linkNameValue = (linkNameValue.match(rg)) ? linkNameValue.match(rg)[0] : ""
 
     if (!linkNameValue.trim() || !linkValue.trim()) return;
 
     let refinedLinkValue: string = linkValue.trim()
-    
-    
 
     if (!refinedLinkValue.startsWith("http://") && !refinedLinkValue.startsWith("https://")) {
       refinedLinkValue = `http://${refinedLinkValue}`
