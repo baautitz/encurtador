@@ -6,8 +6,9 @@ import Link from '../../../models/Link'
 dbConnection()
 
 export default async function middleware(req: NextApiRequest, res: NextApiResponse) {
-  const link = req.url?.replace("/api/links/", "")
+  const link = decodeURI(req.url!.replace("/api/links/", ""))
   const findedLink = (await Link.find({ name: link }))[0]
+  
 
   if (!findedLink) {
     res.status(404).json({ error: `Link '${link}' not found.` })
