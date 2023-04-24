@@ -1,4 +1,4 @@
-import { Loader } from "lucide-react";
+import { Loader, Loader2 } from "lucide-react";
 import LinkElement from "../elements/LinkElement";
 import Head from "next/head";
 import { useEffect, useRef, useState } from "react";
@@ -102,8 +102,8 @@ function loadLinksList(linksLoaded: boolean, linkList: [{ "_id": string, name: s
   if (!linksLoaded || linkList.length == 0) {
     return (
       <div className="h-full w-full flex justify-center items-center gap-3">
-        <Loader />
-        <span>Carregando...</span>
+        <Loader2 strokeWidth={3} className="animate-spin"/>
+        <span >Carregando...</span>
       </div>
     )
   }
