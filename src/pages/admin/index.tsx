@@ -74,22 +74,22 @@ export default function Admin() {
 
         <div className="flex-auto flex flex-col justify-center items-center min-w-[600px] min-h-[600px] space-y-3">
           <span className="text-5xl font-bold">editar links</span>
-          <div id="links-container" className="min-w-[600px] max-w-[1000px] w-4/5 p-6  h-5/6 border-2 border-neutral-900 rounded-xl flex flex-col space-y-6">
+          <div id="links-container" className="min-w-[600px] max-w-[1000px] w-4/5 p-6  h-5/6 border border-neutral-900 rounded-xl flex flex-col space-y-6">
 
             <form id="links-add" className="space-x-3 flex">
-              <input type="text" ref={linkNameInput} onKeyDown={e => createLinkFromInput(e)} placeholder="nome" className="w-36 p-2 rounded-xl border-2 border-neutral-900 bg-transparent" />
+              <input type="text" ref={linkNameInput} onKeyDown={e => createLinkFromInput(e)} placeholder="nome" className="w-36 p-2 rounded-xl border border-neutral-900 bg-transparent focus:border-white outline-none" />
               <div className="flex-auto rounded-xl flex">
-                <input type="text" placeholder="link" defaultValue="http://" disabled className="p-2 w-[67px] rounded-l-xl border-2 border-neutral-900 bg-neutral-900 text-zinc-400" />
-                <input type="text" ref={linkInput} onKeyDown={e => createLinkFromInput(e)} placeholder="link" className="flex-auto p-2 w-full rounded-r-xl border-2 border-neutral-900 bg-transparent" />
+                <input type="text" placeholder="link" defaultValue="http://" disabled className="p-2 w-[67px] rounded-l-xl border border-neutral-900 bg-neutral-900 text-zinc-400" />
+                <input type="text" ref={linkInput} onKeyDown={e => createLinkFromInput(e)} placeholder="link" className="flex-auto p-2 w-full rounded-r-xl border border-neutral-900 bg-transparent focus:border-white outline-none" />
               </div>
-              <button type="button" onClick={createLink} className="bg-sky-600 rounded-xl p-2 border-2 border-sky-600 hover:bg-sky-600/30 transition-colors ease-in duration-100">adicionar</button>
+              <button type="button" onClick={createLink} className="bg-sky-600 rounded-xl p-2 border border-sky-600 hover:bg-sky-600/30 transition-colors ease-in duration-100">adicionar</button>
             </form>
 
             <div id="links-list" className="flex-auto w-full overflow-y-scroll pr-3">
               {loadLinksList(linksLoaded.current, linkList, [onDeleteUpdateLinks, onDeleteLinkFetchLinks])}
             </div>
 
-            <button type="button" className="self-end bg-yellow-500 rounded-xl p-2 border-2 border-yellow-500 hover:bg-yellow-600/30 transition-colors ease-in duration-100">salvar alterações</button>
+            <button type="button" className="self-end bg-yellow-500 rounded-xl p-2 border border-yellow-500 hover:bg-yellow-600/30 transition-colors ease-in duration-100">salvar alterações</button>
           </div>
         </div>
       </div>
