@@ -18,6 +18,9 @@ export default async function middleware(req: NextApiRequest, res: NextApiRespon
             try {
                 name = name.replaceAll(" ", "")
                 link = link.replaceAll(" ", "")
+
+                if (name[0] == "/") name = name.replace("/", "")
+            
                 const createdLink = await Link.create({ name, link })
                 res.status(201).json({ message: "Created", createdLink })
             } catch (error: any) {

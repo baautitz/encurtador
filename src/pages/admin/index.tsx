@@ -35,6 +35,11 @@ export default function Admin() {
     if (!linkNameValue.trim() || !linkValue.trim()) return;
 
     let refinedLinkValue: string = linkValue.trim()
+    
+    if (refinedLinkValue[0] == "/") {
+      refinedLinkValue = refinedLinkValue.replace("/", "")
+    }
+
     if (!refinedLinkValue.startsWith("http://") && !refinedLinkValue.startsWith("https://")) {
       refinedLinkValue = `http://${refinedLinkValue}`
     }
