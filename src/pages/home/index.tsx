@@ -29,7 +29,7 @@ export default function Home() {
                 <title>Bautitz | Perfil</title>
             </Head>
             <div className="flex flex-col p-6 rounded-lg items-center justify-center gap-3 bg-neutral-950 border shadow-[0_0_15px_0_rgba(38,38,38,.5)] border-neutral-800 w-full h-full md:max-w-lg md:h-fit">
-                <div className="flex flex-col items-center gap-3">
+                <div className="flex flex-col items-center gap-3 pb-6">
                     <h1 className="text-5xl">Olá!👋🏻</h1>
                     <h2 className="text-xl">Me chamo Vinicius e tenho 18 anos</h2>
                 </div>
