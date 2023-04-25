@@ -65,7 +65,7 @@ export default function Admin() {
   return (
     <div id="container" className="box-border flex h-screen text-white ">
       <Head>
-        <title>Admin | Bautitz</title>
+        <title>Bautitz | Admin</title>
       </Head>
 
       <SidebarElement />
