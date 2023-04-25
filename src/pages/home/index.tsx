@@ -24,7 +24,7 @@ export default function Home() {
     }
 
     return (
-        <div className="w-screen h-screen flex flex-col justify-center items-center min-h-[400px]">
+        <div className="h-screen flex flex-col justify-center items-center min-h-[400px]">
             <Head>
                 <title>Bautitz | Perfil</title>
             </Head>
