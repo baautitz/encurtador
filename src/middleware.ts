@@ -9,6 +9,6 @@ export async function middleware(req: NextRequest, res: any) {
   if (pages.includes(link.split("/")[0].toLowerCase())) return;
   if (!link) return NextResponse.redirect(new URL("/home", req.url));
 
-  return NextResponse.rewrite(new URL(`/api/redirect/${link}`, req.url))
+  return NextResponse.rewrite(new URL(`/api/redirect/${req.nextUrl.pathname.replace("/","")}`, req.url))
 }
 
