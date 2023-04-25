@@ -1,10 +1,13 @@
 import Image from "next/image";
 import Head from "next/head";
+import { useEffect, useRef, useState } from "react";
+
 
 import TwitterLogo from "../../../public/twitter-logo.svg"
 import InstagramLogo from "../../../public/instagram-logo.svg"
 import DiscordLogo from "../../../public/discord-logo.svg"
-import { useEffect, useRef, useState } from "react";
+import GitHubLogo from "../../../public/github-logo.svg"
+
 
 export default function Home() {
     const messageBox = useRef<any>()
@@ -43,6 +46,11 @@ export default function Home() {
                     <a href="https://www.instagram.com/vinicius.bautitz" target="_blank" className="w-40 p-2 border border-rose-600 shadow-[0_0_8px_0_rgba(225,29,72,.5)]  rounded-lg flex gap-3 items-center hover:bg-rose-600/30 transition-all ease-in duration-100">
                         <Image alt="Instagram" src={InstagramLogo} width={30} height={30} ></Image>
                         Instagram
+                    </a>
+
+                    <a href="https://github.com/baautitz" target="_blank" className="w-40 p-2 border border-white shadow-[0_0_7px_0_rgba(255,255,255,.4)]  rounded-lg flex gap-3 items-center hover:bg-white/30 transition-all ease-in duration-100">
+                        <Image alt="GitHub" src={GitHubLogo} width={30} height={30} ></Image>
+                        GitHub
                     </a>
 
                     <button type="button" onClick={() => copyDiscord("Discord copiado!", "vini.#9600")} className="w-40 p-2 border border-sky-700 rounded-lg flex gap-3 items-center shadow-[0_0_8px_0_rgba(3,105,161,.5)] hover:bg-sky-700/30 transition-all ease-in duration-100">
