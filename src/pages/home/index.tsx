@@ -2,6 +2,7 @@ import Image from "next/image";
 import Head from "next/head";
 import { useEffect, useRef, useState } from "react";
 
+import MessageBoxElement, { showMessageBox } from "../elements/MessageBoxElement"
 
 import TwitterLogo from "../../../public/twitter-logo.svg"
 import InstagramLogo from "../../../public/instagram-logo.svg"
@@ -10,58 +11,163 @@ import GitHubLogo from "../../../public/github-logo.svg"
 
 
 export default function Home() {
-    const messageBox = useRef<any>()
-    const [message, setMessage] = useState('')
-
-    const copyDiscord = (message: string, toCopy: string) => {
-        messageBox.current.classList.remove("hidden")
-        setTimeout(() => messageBox.current.classList.remove("opacity-0"), 105)
-        setTimeout(() => {
-            messageBox.current.classList.add("opacity-0")
-            setTimeout(() => messageBox.current.classList.add("hidden"), 105)
-        }, 1500)
-
-
-        navigator.clipboard.writeText(toCopy)
-        setMessage(message)
-    }
+    const copyDiscord = (toCopy: string) => navigator.clipboard.writeText(toCopy)
 
     return (
-        <div className="h-screen flex flex-col justify-center items-center min-h-[400px]">
+        <div className="
+            h-screen
+            min-h-[400px]
+
+            flex 
+            flex-col 
+            justify-center 
+            items-center 
+
+            bg-black 
+            text-white 
+        ">
             <Head>
                 <title>Bautitz | Perfil</title>
             </Head>
-            <div className="flex flex-col p-6 rounded-lg items-center justify-center gap-3 bg-neutral-950 border shadow-[0_0_15px_0_rgba(38,38,38,.5)] border-neutral-800 w-full h-full md:max-w-lg md:h-fit">
-                <div className="flex flex-col items-center gap-3 pb-6">
+            <div className="
+                w-full 
+                h-full 
+
+                flex 
+                flex-col 
+
+                items-center 
+                justify-center 
+
+                p-6 
+                gap-3 
+
+                bg-neutral-950 
+                border
+                border-neutral-800  
+                shadow-[0_0_15px_0_rgba(38,38,38,.5)] 
+            
+                md:rounded-lg 
+                md:max-w-lg 
+                md:h-fit
+            ">
+                <div className="
+                    flex 
+                    flex-col 
+                    items-center 
+
+                    pb-6
+                    gap-3 
+                ">
                     <h1 className="text-5xl">Olá!👋🏻</h1>
                     <h2 className="text-xl">Me chamo Vinicius e tenho 18 anos</h2>
                 </div>
                 <span className="text-neutral-500">Minhas redes socias:</span>
-                <div className="w-full flex flex-col items-center gap-2">
-                    <a href="https://twitter.com/baautitz" target="_blank" className="w-40 p-2 border border-sky-600 shadow-[0_0_8px_0_rgba(2,132,199,.5)] rounded-lg flex gap-3 items-center hover:bg-sky-600/30 transition-all ease-in duration-100">
+                <div className="
+                    w-full 
+                    flex 
+                    flex-col 
+                    items-center 
+                    gap-2
+                ">
+                    <a href="https://twitter.com/baautitz" target="_blank" className="
+                        w-40 
+                        flex
+                        items-center 
+
+                        p-2 
+                        gap-3 
+                    
+                        border 
+                        rounded-lg 
+                        border-sky-600 
+                        shadow-[0_0_8px_0_rgba(2,132,199,.5)] 
+                        
+                        hover:bg-sky-600/30 
+
+                        transition-all 
+                        ease-in 
+                        duration-100
+                    ">
                         <Image alt="Twitter" src={TwitterLogo} width={30} height={30} ></Image>
                         Twitter
                     </a>
 
-                    <a href="https://www.instagram.com/vinicius.bautitz" target="_blank" className="w-40 p-2 border border-rose-600 shadow-[0_0_8px_0_rgba(225,29,72,.5)]  rounded-lg flex gap-3 items-center hover:bg-rose-600/30 transition-all ease-in duration-100">
+                    <a href="https://www.instagram.com/vinicius.bautitz" target="_blank" className="
+                        w-40 
+                        flex
+                        items-center 
+
+                        p-2 
+                        gap-3 
+                    
+                        border 
+                        rounded-lg 
+                        border-rose-600 
+                        shadow-[0_0_8px_0_rgba(225,29,72,.5)]
+
+                        hover:bg-rose-600/30
+
+                        transition-all 
+                        ease-in 
+                        duration-100
+                    ">
                         <Image alt="Instagram" src={InstagramLogo} width={30} height={30} ></Image>
                         Instagram
                     </a>
 
-                    <a href="https://github.com/baautitz" target="_blank" className="w-40 p-2 border border-white shadow-[0_0_7px_0_rgba(255,255,255,.4)]  rounded-lg flex gap-3 items-center hover:bg-white/30 transition-all ease-in duration-100">
+                    <a href="https://github.com/baautitz" target="_blank" className="
+                        w-40 
+                        flex
+                        items-center 
+
+                        p-2 
+                        gap-3 
+                    
+                        border
+                        rounded-lg 
+                        border-white 
+                        shadow-[0_0_7px_0_rgba(255,255,255,.5)]
+
+                        hover:bg-white/30
+
+                        transition-all 
+                        ease-in 
+                        duration-100
+                    ">
                         <Image alt="GitHub" src={GitHubLogo} width={30} height={30} ></Image>
                         GitHub
                     </a>
 
-                    <button type="button" onClick={() => copyDiscord("Discord copiado!", "vini.#9600")} className="w-40 p-2 border border-sky-700 rounded-lg flex gap-3 items-center shadow-[0_0_8px_0_rgba(3,105,161,.5)] hover:bg-sky-700/30 transition-all ease-in duration-100">
+                    <button type="button" onClick={() => {
+                        showMessageBox("Discord copiado!")
+                        copyDiscord("vini.#9600")
+                    }} className="
+                        w-40 
+                        flex
+                        items-center 
+
+                        p-2 
+                        gap-3 
+                    
+                        border 
+                        rounded-lg 
+                        border-sky-700
+                        shadow-[0_0_8px_0_rgba(3,105,161,.5)] 
+                        
+                        hover:bg-sky-700/30
+
+                        transition-all 
+                        ease-in 
+                        duration-100
+                    ">
                         <Image alt="Discord" src={DiscordLogo} width={30} height={30} ></Image>
                         vini.#9600
                     </button>
                 </div>
+                <MessageBoxElement />
             </div>
-            <div className="fixed bottom-5">
-                <span ref={messageBox} className="bg-emerald-600 p-3 rounded-lg transition-all ease-in duration-100 hidden opacity-0">{message}</span>
-            </div>
+            
         </div>
     )
 }

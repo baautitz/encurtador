@@ -1,6 +1,6 @@
 import axios from "axios"
 
-function LinkElement(props: { key: string, id: string, nome: string, link: string, onDelete: any[] }) {
+function LinkElement(props: { key: string, id: string, nome: string, link: string, onDelete: any[], onCopy: any }) {
     const deleteLink = () => {
         props.onDelete[0](props.nome)
         axios.delete(`/api/links/${props.nome}`).then(() => {
@@ -10,6 +10,7 @@ function LinkElement(props: { key: string, id: string, nome: string, link: strin
 
     const copyLink = () => {
         navigator.clipboard.writeText(`bautitz.ga/${props.nome}`)
+        props.onCopy(`Link /${props.nome} copiado!`)
     }
     return (
         <li className="space-x-3 flex">

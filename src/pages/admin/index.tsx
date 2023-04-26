@@ -1,9 +1,12 @@
-import { Loader, Loader2 } from "lucide-react";
-import LinkElement from "../elements/LinkElement";
 import Head from "next/head";
-import { useEffect, useRef, useState } from "react";
 import axios from "axios";
+import { useEffect, useRef, useState } from "react";
+
+import { Loader, Loader2 } from "lucide-react";
+
+import LinkElement from "../elements/LinkElement";
 import SidebarElement from "../elements/SidebarElement";
+import MessageBoxElement, { showMessageBox } from "../elements/MessageBoxElement"
 
 export default function Admin() {
   const [linkList, setLinkList] = useState<any>([])
@@ -54,7 +57,7 @@ export default function Admin() {
     })
   }
 
-  const onDeleteUpdateLinks = (name: string) => {
+  const onDeleteRemoveFromLinksList = (name: string) => {
     setLinkList(linkList.filter((l: { name: any; }) => name != l.name))
   }
 
@@ -86,11 +89,12 @@ export default function Admin() {
             </form>
 
             <div id="links-list" className="flex-auto w-full overflow-y-scroll pr-3">
-              {loadLinksList(linksLoaded.current, linkList, [onDeleteUpdateLinks, onDeleteLinkFetchLinks])}
+              {loadLinksList(linksLoaded.current, linkList, [onDeleteRemoveFromLinksList, onDeleteLinkFetchLinks], showMessageBox)}
             </div>
 
             <button type="button" className="self-end bg-yellow-500 rounded-xl p-2 border border-yellow-500 hover:bg-yellow-600/30 transition-colors ease-in duration-100">salvar alterações</button>
           </div>
+          <MessageBoxElement />
         </div>
       </div>
 
@@ -98,11 +102,11 @@ export default function Admin() {
   )
 }
 
-function loadLinksList(linksLoaded: boolean, linkList: [{ "_id": string, name: string, link: string }] | [], onDelete: any[]) {
+function loadLinksList(linksLoaded: boolean, linkList: [{ "_id": string, name: string, link: string }] | [], onDelete: any[], onCopy: any) {
   if (!linksLoaded || linkList.length == 0) {
     return (
       <div className="h-full w-full flex justify-center items-center gap-3">
-        <Loader2 strokeWidth={3} className="animate-spin"/>
+        <Loader2 strokeWidth={3} className="animate-spin" />
         <span >Carregando...</span>
       </div>
     )
@@ -110,7 +114,7 @@ function loadLinksList(linksLoaded: boolean, linkList: [{ "_id": string, name: s
 
   return (
     <ul className="space-y-3">
-      {linkList.map(l => <LinkElement key={l.name} id={l["_id"]} nome={l.name} link={l.link} onDelete={onDelete} />)}
+      {linkList.map(l => <LinkElement key={l.name} id={l["_id"]} nome={l.name} link={l.link} onDelete={onDelete} onCopy={onCopy} />)}
     </ul>
   )
 }
