@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 
 let showMessageBox: any = () => { }
 
-function messageBoxElement() {
+function MessageBoxElement() {
     const messageBoxDiv = useRef<any>()
     const [messageBoxAnimationTimeout, setMessageBoxAnimationTimeout] = useState([setTimeout(() => { }), setTimeout(() => { })]);
     const [messageBoxValue, setMessageBoxValue] = useState('')
@@ -51,4 +51,4 @@ function messageBoxElement() {
 }
 
 export { showMessageBox }
-export default messageBoxElement
+export default MessageBoxElement
