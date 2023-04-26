@@ -2,7 +2,7 @@ import { ChevronUp, Edit } from "lucide-react"
 
 function SidebarElement() {
     return (
-        <div id="sidebar-container" className="lg:flex-none h-20 lg:h-full lg:w-72 bg-neutral-950 shadow-[0_0_15px_0_rgba(38,38,38,.5)]  border-r border-neutral-800 lg:p-6 lg:overflow-y-auto">
+        <div id="sidebar-container" className="lg:flex-none h-20 lg:h-full lg:w-72 bg-neutral-950 shadow-[0_0_15px_0_rgba(38,38,38,.5)] lg:border-r border-neutral-800 lg:p-6 lg:overflow-y-auto">
 
         <div className="flex lg:flex-col h-full px-6 lg:px-0 items-center lg:items-start lg:min-h-[180px]">
           <nav className="flex-auto space-y-3">
