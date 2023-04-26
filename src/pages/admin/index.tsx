@@ -75,12 +75,12 @@ export default function Admin() {
 
       <div id="main-container" className="flex-auto lg:px-6 flex flex-col bg-black overflow-y-auto">
 
-        <div className="flex-auto flex flex-col justify-center items-center lg:min-w-[600px] min-h-[600px] space-y-3">
-          <span className="text-5xl font-bold">editar links</span>
-          <div id="links-container" className="bg-neutral-950 lg:min-w-[600px] max-w-[1000px] w-full lg:w-4/5 p-6 h-5/6 border border-neutral-900 rounded-xl flex flex-col space-y-6">
+        <div className="flex-auto flex flex-col justify-center items-center lg:min-w-[600px] min-h-[600px] lg:space-y-3">
+          <span className="text-5xl font-bold py-3 lg:py-0">editar links</span>
+          <div id="links-container" className="bg-neutral-950 lg:min-w-[600px] max-w-[1000px] w-full lg:w-4/5 p-6 flex-auto lg:flex-none h-5/6 border border-neutral-900 rounded-xl flex flex-col space-y-6">
 
-            <form id="links-add" className="space-x-3 flex">
-              <input type="text" ref={linkNameInput} onKeyDown={e => createLinkFromInput(e)} placeholder="nome" className="w-36 p-2 rounded-xl border border-neutral-900 bg-transparent focus:border-white outline-none" />
+            <form id="links-add" className="space-y-2 lg:space-y-0 lg:space-x-3 flex flex-col lg:flex-row">
+              <input type="text" ref={linkNameInput} onKeyDown={e => createLinkFromInput(e)} placeholder="nome" className="lg:w-36 p-2 rounded-xl border border-neutral-900 bg-transparent focus:border-white outline-none" />
               <div className="flex-auto rounded-xl flex">
                 <input type="text" placeholder="link" defaultValue="http://" disabled className="p-2 w-[67px] rounded-l-xl border border-neutral-900 bg-neutral-900 text-zinc-400" />
                 <input type="text" ref={linkInput} onKeyDown={e => createLinkFromInput(e)} placeholder="link" className="flex-auto p-2 w-full rounded-r-xl border border-neutral-900 bg-transparent focus:border-white outline-none" />
