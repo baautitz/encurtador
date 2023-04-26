@@ -66,18 +66,18 @@ export default function Admin() {
   }
 
   return (
-    <div id="container" className="box-border flex h-screen text-white ">
+    <div id="container" className="box-border flex flex-col lg:flex-row h-screen text-white ">
       <Head>
         <title>Bautitz | Admin</title>
       </Head>
 
       <SidebarElement />
 
-      <div id="main-container" className="flex-auto px-6 flex flex-col bg-black overflow-y-auto">
+      <div id="main-container" className="flex-auto lg:px-6 flex flex-col bg-black overflow-y-auto">
 
-        <div className="flex-auto flex flex-col justify-center items-center min-w-[600px] min-h-[600px] space-y-3">
+        <div className="flex-auto flex flex-col justify-center items-center lg:min-w-[600px] min-h-[600px] space-y-3">
           <span className="text-5xl font-bold">editar links</span>
-          <div id="links-container" className="min-w-[600px] max-w-[1000px] w-4/5 p-6  h-5/6 border border-neutral-900 rounded-xl flex flex-col space-y-6">
+          <div id="links-container" className="bg-neutral-950 lg:min-w-[600px] max-w-[1000px] w-full lg:w-4/5 p-6 h-5/6 border border-neutral-900 rounded-xl flex flex-col space-y-6">
 
             <form id="links-add" className="space-x-3 flex">
               <input type="text" ref={linkNameInput} onKeyDown={e => createLinkFromInput(e)} placeholder="nome" className="w-36 p-2 rounded-xl border border-neutral-900 bg-transparent focus:border-white outline-none" />
@@ -113,7 +113,7 @@ function loadLinksList(linksLoaded: boolean, linkList: [{ "_id": string, name: s
   }
 
   return (
-    <ul className="space-y-3">
+    <ul className="space-y-5 lg:space-y-3">
       {linkList.map(l => <LinkElement key={l.name} id={l["_id"]} nome={l.name} link={l.link} onDelete={onDelete} onCopy={onCopy} />)}
     </ul>
   )
