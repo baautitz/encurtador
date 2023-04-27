@@ -59,8 +59,8 @@ export default function Home() {
                     pb-6
                     gap-3 
                 ">
-                    <h1 className="text-5xl">Olá!👋🏻</h1>
-                    <h2 className="text-xl">Me chamo Vinicius e tenho 18 anos</h2>
+                    <h1 className="text-5xl font-bold">Olá!👋🏻</h1>
+                    <h2 className="text-xl font-bold">Me chamo Vinicius e tenho 18 anos</h2>
                 </div>
                 <span className="text-neutral-500">Minhas redes socias:</span>
                 <div className="

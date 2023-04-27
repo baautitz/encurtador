@@ -1,9 +1,10 @@
+import { NextServer } from 'next/dist/server/next'
 import { NextResponse } from 'next/server'
 import { NextRequest } from 'next/server'
 
-const pages = ["admin", "api", "_next", "favicon.ico", "home"]
-
 export async function middleware(req: NextRequest, res: any) {
+  const pages = ["admin", "api", "_next", "favicon.ico", "home", "login"]
+  
   let link = req.nextUrl.pathname.toLocaleLowerCase().replace("/","")
 
   if (pages.includes(link.split("/")[0].toLowerCase())) return;
