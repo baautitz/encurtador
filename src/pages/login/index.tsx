@@ -13,7 +13,7 @@ function Login() {
             bg-black
         ">
             <Head>
-                <title>Bautiz | Login</title>
+                <title>Bautitz | Login</title>
             </Head>
             <div className="
                 flex 
@@ -22,7 +22,7 @@ function Login() {
             ">
                 <h1 className="text-5xl font-bold">login</h1>
                 <h2 className="text-xl font-bold pt-3">Realize seu login para continuar</h2>
-                <form action="" className="
+                <form className="
                     flex
                     flex-col
 

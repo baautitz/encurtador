@@ -2,7 +2,7 @@ import Head from "next/head";
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 
-import { Loader, Loader2 } from "lucide-react";
+import { Loader2 } from "lucide-react";
 
 import LinkElement from "../elements/LinkElement";
 import SidebarElement from "../elements/SidebarElement";
@@ -76,23 +76,23 @@ export default function Admin() {
       <div id="main-container" className="flex-auto lg:px-6 flex flex-col bg-black overflow-y-auto">
 
         <div className="flex-auto flex flex-col justify-center items-center lg:min-w-[600px] min-h-[600px] lg:space-y-3">
-          <span className="text-5xl font-bold py-3 lg:py-0">editar links</span>
-          <div id="links-container" className="bg-neutral-950 lg:min-w-[600px] max-w-[1000px] w-full lg:w-4/5 p-6 flex-auto lg:flex-none h-5/6 border border-neutral-900 rounded-xl flex flex-col space-y-6">
+          <span className="text-5xl font-bold py-3 lg:py-0 hidden lg:inline">editar links</span>
+          <div id="links-container" className="bg-neutral-950 lg:min-w-[600px] max-w-[1000px] w-full lg:w-4/5 p-6 flex-auto lg:flex-none h-5/6 border border-neutral-900 lg:rounded-lg flex flex-col space-y-6">
 
             <form id="links-add" className="space-y-2 lg:space-y-0 lg:space-x-3 flex flex-col lg:flex-row">
-              <input type="text" ref={linkNameInput} onKeyDown={e => createLinkFromInput(e)} placeholder="nome" className="lg:w-36 p-2 rounded-xl border border-neutral-900 bg-transparent focus:border-white outline-none" />
-              <div className="flex-auto rounded-xl flex">
+              <input type="text" ref={linkNameInput} onKeyDown={e => createLinkFromInput(e)} placeholder="nome" className="lg:w-36 p-2 rounded-lg border border-neutral-900 bg-transparent focus:border-white outline-none" />
+              <div className="flex-auto rounded-lg flex">
                 <input type="text" placeholder="link" defaultValue="http://" disabled className="p-2 w-[67px] rounded-l-xl border border-neutral-900 bg-neutral-900 text-zinc-400" />
                 <input type="text" ref={linkInput} onKeyDown={e => createLinkFromInput(e)} placeholder="link" className="flex-auto p-2 w-full rounded-r-xl border border-neutral-900 bg-transparent focus:border-white outline-none" />
               </div>
-              <button type="button" onClick={createLink} className="bg-sky-600 rounded-xl p-2 border border-sky-600 hover:bg-sky-600/30 transition-colors ease-in duration-100">adicionar</button>
+              <button type="button" onClick={createLink} className="bg-sky-600 rounded-lg p-2 border border-sky-600 hover:bg-sky-600/30 transition-colors ease-in duration-100">adicionar</button>
             </form>
 
             <div id="links-list" className="flex-auto w-full overflow-y-scroll pr-3">
               {loadLinksList(linksLoaded.current, linkList, [onDeleteRemoveFromLinksList, onDeleteLinkFetchLinks], showMessageBox)}
             </div>
 
-            <button type="button" className="self-end bg-yellow-500 rounded-xl p-2 border border-yellow-500 hover:bg-yellow-600/30 transition-colors ease-in duration-100">salvar alterações</button>
+            <button type="button" className="self-end bg-yellow-500 rounded-lg p-2 border border-yellow-500 hover:bg-yellow-600/30 transition-colors ease-in duration-100">salvar alterações</button>
           </div>
           <MessageBoxElement />
         </div>
