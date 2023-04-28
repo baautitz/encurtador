@@ -57,7 +57,6 @@ export default function Home() {
                     flex-col 
                     items-center 
 
-                    pb-6
                     gap-3 
                 ">
                     <h1 className="text-5xl font-bold flex gap-2">

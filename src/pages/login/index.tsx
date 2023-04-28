@@ -94,7 +94,9 @@ function Login() {
                         transition
                         ease-in
                         duration-100
-                    ">Login</button>
+                    ">
+                        Login
+                    </button>
                 </form>
             </div>
         </div>
