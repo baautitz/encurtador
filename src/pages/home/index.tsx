@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Head from "next/head";
-import { useEffect, useRef, useState } from "react";
+import Twemoji from "react-twemoji";
 
 import MessageBoxElement, { showMessageBox } from "../elements/MessageBoxElement"
 
@@ -12,7 +12,7 @@ import GitHubLogo from "../../../public/github-logo.svg"
 
 export default function Home() {
     const copyDiscord = (toCopy: string) => navigator.clipboard.writeText(toCopy)
-
+    
     return (
         <div className="
             h-screen
@@ -59,7 +59,7 @@ export default function Home() {
                     pb-6
                     gap-3 
                 ">
-                    <h1 className="text-5xl font-bold">Olá!👋🏻</h1>
+                    <h1 className="text-5xl font-bold flex ">Olá!<Twemoji noWrapper options={{ className: 'twemoji' }}>👋🏻</Twemoji></h1>
                     <h2 className="text-xl font-bold">Me chamo Vinicius e tenho 18 anos</h2>
                 </div>
                 <span className="text-neutral-500">Minhas redes socias:</span>
