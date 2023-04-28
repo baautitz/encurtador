@@ -16,30 +16,39 @@ function Login() {
                 <title>Bautitz | Login</title>
             </Head>
             <div className="
+                h-full 
+                w-full
+                sm:h-auto
+                sm:w-[620px]
+
                 flex 
                 flex-col  
                 items-center
             ">
-                <h1 className="text-5xl font-bold">login</h1>
-                <h2 className="text-xl font-bold pt-3">Realize seu login para continuar</h2>
                 <form className="
+                    h-full 
+                    w-full
+
                     flex
                     flex-col
+                    items-center
+                    justify-center
 
                     p-6
-                    mt-6
                     space-y-3
 
                     border
                     border-neutral-800
-                    rounded-lg
+                    sm:rounded-lg
                     bg-neutral-950
                     
                 ">
-                    <div className="flex flex-col space-y-2">
+                    <div className="flex flex-col items-center">
+                        <h1 className="text-5xl font-bold">login</h1>
+                        <h2 className="text-xl font-bold pt-3">Realize seu login para continuar</h2>
+                    </div>
+                    <div className="flex flex-col space-y-2 w-full">
                         <input type="text" name="user" id="user-input" placeholder="Usuário" className="
-                            w-60
-                            sm:w-80
                             p-2
 
                             border
@@ -55,8 +64,6 @@ function Login() {
                             duration-100
                         "/>
                         <input type="password" name="password" id="password-input" placeholder="Senha" className="
-                            w-60
-                            sm:w-80
                             p-2
 
                             border

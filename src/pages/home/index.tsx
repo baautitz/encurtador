@@ -8,11 +8,12 @@ import TwitterLogo from "../../../public/twitter-logo.svg"
 import InstagramLogo from "../../../public/instagram-logo.svg"
 import DiscordLogo from "../../../public/discord-logo.svg"
 import GitHubLogo from "../../../public/github-logo.svg"
+import WavingHandEmoji from "../../../public/waving-hand-emoj.svg"
 
 
 export default function Home() {
     const copyDiscord = (toCopy: string) => navigator.clipboard.writeText(toCopy)
-    
+
     return (
         <div className="
             h-screen
@@ -59,8 +60,11 @@ export default function Home() {
                     pb-6
                     gap-3 
                 ">
-                    <h1 className="text-5xl font-bold flex ">Olá!<Twemoji noWrapper options={{ className: 'twemoji' }}>👋🏻</Twemoji></h1>
-                    <h2 className="text-xl font-bold">Me chamo Vinicius e tenho 18 anos</h2>
+                    <h1 className="text-5xl font-bold flex gap-2">
+                        Olá!
+                        <Image draggable={false} alt="Instagram" src={WavingHandEmoji} width={40} />
+                    </h1>
+                    <h2 className="text-xl font-bold text-center">Me chamo Vinicius e tenho 18 anos</h2>
                 </div>
                 <span className="text-neutral-500">Minhas redes socias:</span>
                 <div className="
@@ -89,7 +93,7 @@ export default function Home() {
                         ease-in 
                         duration-100
                     ">
-                        <Image alt="Twitter" src={TwitterLogo} width={30} height={30} ></Image>
+                        <Image draggable={false} alt="Twitter" src={TwitterLogo} width={30} />
                         Twitter
                     </a>
 
@@ -112,7 +116,7 @@ export default function Home() {
                         ease-in 
                         duration-100
                     ">
-                        <Image alt="Instagram" src={InstagramLogo} width={30} height={30} ></Image>
+                        <Image draggable={false} alt="Instagram" src={InstagramLogo} width={30} />
                         Instagram
                     </a>
 
@@ -135,7 +139,7 @@ export default function Home() {
                         ease-in 
                         duration-100
                     ">
-                        <Image alt="GitHub" src={GitHubLogo} width={30} height={30} ></Image>
+                        <Image draggable={false} alt="GitHub" src={GitHubLogo} width={30} />
                         GitHub
                     </a>
 
@@ -161,13 +165,13 @@ export default function Home() {
                         ease-in 
                         duration-100
                     ">
-                        <Image alt="Discord" src={DiscordLogo} width={30} height={30} ></Image>
+                        <Image draggable={false} alt="Discord" src={DiscordLogo} width={30} />
                         vini.#9600
                     </button>
                 </div>
                 <MessageBoxElement />
             </div>
-            
+
         </div>
     )
 }
