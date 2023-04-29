@@ -44,9 +44,9 @@ function Login() {
                     bg-neutral-950
                     
                 ">
-                    <div className="flex flex-col items-center">
+                    <div className="flex flex-col items-center gap-3">
                         <h1 className="text-5xl font-bold">login</h1>
-                        <h2 className="text-xl font-bold pt-3">Realize seu login para continuar</h2>
+                        <h2 className="text-xl text-neutral-500">Insira seus dados para continuar</h2>
                     </div>
                     <div className="flex flex-col space-y-2 w-full">
                         <input type="text" name="user" id="user-input" placeholder="Usuário" className="
