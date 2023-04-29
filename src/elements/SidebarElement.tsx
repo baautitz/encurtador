@@ -34,6 +34,7 @@ function SidebarElement() {
         <span className="flex-auto text-start overflow-hidden text-ellipsis whitespace-nowrap font-bold text-lg">Vinicius</span>
         <LogOut strokeWidth={2}/>
       </button>
+      
     </div>
   )
 }
