@@ -144,7 +144,7 @@ export default function Home() {
 
                     <button type="button" onClick={() => {
                         showMessageBox("Discord copiado!")
-                        copyDiscord("vini.#9600")
+                        copyDiscord("vini.#9999")
                     }} className="
                         w-40 
                         flex
@@ -165,7 +165,7 @@ export default function Home() {
                         duration-100
                     ">
                         <Image draggable={false} alt="Discord" src={DiscordLogo} width={30} />
-                        vini.#9600
+                        vini.#9999
                     </button>
                 </div>
                 <MessageBoxElement />
