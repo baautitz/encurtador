@@ -4,9 +4,9 @@ import { useEffect, useRef, useState } from "react";
 
 import { Loader2 } from "lucide-react";
 
-import LinkElement from "../elements/LinkElement";
-import SidebarElement from "../elements/SidebarElement";
-import MessageBoxElement, { showMessageBox } from "../elements/MessageBoxElement"
+import LinkElement from "../../elements/LinkElement";
+import SidebarElement from "../../elements/SidebarElement";
+import MessageBoxElement, { showMessageBox } from "../../elements/MessageBoxElement"
 
 export default function Admin() {
   const [linkList, setLinkList] = useState<any>([])
@@ -82,8 +82,8 @@ export default function Admin() {
             <form id="links-add" className="space-y-2 lg:space-y-0 lg:space-x-3 flex flex-col lg:flex-row">
               <input type="text" ref={linkNameInput} onKeyDown={e => createLinkFromInput(e)} placeholder="nome" className="lg:w-36 p-2 rounded-lg border border-neutral-900 bg-transparent focus:border-white outline-none" />
               <div className="flex-auto rounded-lg flex">
-                <input type="text" placeholder="link" defaultValue="http://" disabled className="p-2 w-[67px] rounded-l-xl border border-neutral-900 bg-neutral-900 text-zinc-400" />
-                <input type="text" ref={linkInput} onKeyDown={e => createLinkFromInput(e)} placeholder="link" className="flex-auto p-2 w-full rounded-r-xl border border-neutral-900 bg-transparent focus:border-white outline-none" />
+                <input type="text" placeholder="link" defaultValue="http://" disabled className="p-2 w-[67px] rounded-l-lg border border-neutral-900 bg-neutral-900 text-zinc-400" />
+                <input type="text" ref={linkInput} onKeyDown={e => createLinkFromInput(e)} placeholder="link" className="flex-auto p-2 w-full rounded-r-lg border border-neutral-900 bg-transparent focus:border-white outline-none" />
               </div>
               <button type="button" onClick={createLink} className="bg-sky-600 rounded-lg p-2 border border-sky-600 hover:bg-sky-600/30 transition-colors ease-in duration-100">adicionar</button>
             </form>

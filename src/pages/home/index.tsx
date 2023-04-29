@@ -2,7 +2,7 @@ import Image from "next/image";
 import Head from "next/head";
 import Twemoji from "react-twemoji";
 
-import MessageBoxElement, { showMessageBox } from "../elements/MessageBoxElement"
+import MessageBoxElement, { showMessageBox } from "../../elements/MessageBoxElement"
 
 import TwitterLogo from "../../../public/twitter-logo.svg"
 import InstagramLogo from "../../../public/instagram-logo.svg"

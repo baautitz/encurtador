@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Link from "next/link";
 
 function Login() {
     return (
@@ -79,24 +80,28 @@ function Login() {
                             duration-100
                         "/>
                     </div>
-                    <button type="submit" className="
-                        w-20
-                        p-2
-                        self-end
+                    <Link href="admin" className="
+                    w-20
+                    p-2
+                    self-end
 
-                        border
-                        border-sky-600
-                        rounded-lg
+                    text-center
 
-                        bg-sky-600
-                        hover:bg-sky-600/30
+                    border
+                    border-sky-600
+                    rounded-lg
 
-                        transition
-                        ease-in
-                        duration-100
+                    bg-sky-600
+                    hover:bg-sky-600/30
+
+                    transition
+                    ease-in
+                    duration-100
                     ">
-                        Login
-                    </button>
+                        <button type="button" >
+                            Login
+                        </button>
+                    </Link>
                 </form>
             </div>
         </div>
