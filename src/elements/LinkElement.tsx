@@ -9,7 +9,7 @@ function LinkElement(props: { key: string, id: string, nome: string, link: strin
     }
 
     const copyLink = () => {
-        navigator.clipboard.writeText(`bautitz.ga/${props.nome}`)
+        navigator.clipboard.writeText(`https://bautitz.ga/${props.nome}`)
         props.onCopy(`Link /${props.nome} copiado!`)
     }
     return (
