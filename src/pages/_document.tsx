@@ -4,6 +4,7 @@ export default function Document() {
   return (
     <Html lang="en" className="[color-scheme:dark]">
       <Head />    
+      <link rel="icon" href="/favicon.svg" /> 
       <body>
         <Main />
         <NextScript />

@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 import { NextRequest } from 'next/server'
 
 export async function middleware(req: NextRequest, res: any) {
-  const pages = ["admin", "api", "_next", "home", "login"]
+  const pages = ["admin", "api", "_next", "home", "login", "favicon.svg"]
   let link = req.nextUrl.pathname.toLocaleLowerCase().replace("/","")
 
   // const logged = false;
