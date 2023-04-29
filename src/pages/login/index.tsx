@@ -20,7 +20,7 @@ function Login() {
                 h-full 
                 w-full
                 sm:h-auto
-                sm:w-[620px]
+                sm:w-[500px]
 
                 flex 
                 flex-col  
