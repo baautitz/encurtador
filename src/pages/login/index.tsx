@@ -1,6 +1,9 @@
 import Head from "next/head";
 import Link from "next/link";
 
+import Logo from "../../../public/logo-big-name.svg"
+import Image from "next/image";
+
 function Login() {
     return (
         <div className="
@@ -80,28 +83,31 @@ function Login() {
                             duration-100
                         "/>
                     </div>
-                    <Link href="admin" className="
-                    w-20
-                    p-2
-                    self-end
+                    <div className="select-none w-full flex justify-between">
+                        <Image draggable={false} src={Logo} width={120} alt="logo" />
+                        <Link href="admin" className="
+                            w-20
+                            p-2
+                            self-end
 
-                    text-center
+                            text-center
 
-                    border
-                    border-sky-600
-                    rounded-lg
+                            border
+                            border-sky-600
+                            rounded-lg
 
-                    bg-sky-600
-                    hover:bg-sky-600/30
+                            bg-sky-600
+                            hover:bg-sky-600/30
 
-                    transition
-                    ease-in
-                    duration-100
-                    ">
-                        <button type="button" >
-                            Login
-                        </button>
-                    </Link>
+                            transition
+                            ease-in
+                            duration-100
+                        ">
+                            <button type="button" >
+                                Login
+                            </button>
+                        </Link>
+                    </div>
                 </form>
             </div>
         </div>

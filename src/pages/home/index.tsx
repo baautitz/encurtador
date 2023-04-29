@@ -9,7 +9,7 @@ import InstagramLogo from "../../../public/instagram-logo.svg"
 import DiscordLogo from "../../../public/discord-logo.svg"
 import GitHubLogo from "../../../public/github-logo.svg"
 import WavingHandEmoji from "../../../public/waving-hand-emoj.svg"
-
+import Logo from "../../../public/logo-big-name.svg"
 
 export default function Home() {
     const copyDiscord = (toCopy: string) => navigator.clipboard.writeText(toCopy)
@@ -67,10 +67,12 @@ export default function Home() {
                 </div>
                 <span className="text-neutral-500">Minhas redes socias:</span>
                 <div className="
-                    w-full 
-                    flex 
-                    flex-col 
-                    items-center 
+                    grid
+                    md:grid-cols-2
+                    
+                    items-center
+                    justify-center
+                     
                     gap-2
                 ">
                     <a href="https://twitter.com/baautitz" target="_blank" className="
@@ -168,9 +170,9 @@ export default function Home() {
                         vini.#9999
                     </button>
                 </div>
+                <Image draggable={false} src={Logo} alt="logo" width={100} className="mt-2"/>
                 <MessageBoxElement />
             </div>
-
         </div>
     )
 }
