@@ -1,33 +1,41 @@
-import { ChevronUp, Edit } from "lucide-react"
-import Image from "next/image";
-import Logo from "../../public/logo-big-name.svg"
+import { useRouter } from "next/router";
 
+import Image from "next/image";
+import Link from "next/link";
+
+import Logo from "../../public/logo-big-name.svg"
+import { LogOut } from "lucide-react";
 
 function SidebarElement() {
-    return (
-        <div id="sidebar-container" className="lg:flex-none h-20 lg:h-full lg:w-72 bg-neutral-950 shadow-[0_0_15px_0_rgba(38,38,38,.5)] border-b lg:border-b-0 lg:border-r border-neutral-800 lg:p-6 lg:overflow-y-auto">
+  const { push } = useRouter();
 
-        <div className="flex lg:flex-col h-full px-6 lg:px-0 items-center lg:items-start lg:min-h-[180px]">
-          <nav className="flex-auto flex items-start space-y-3 w-full">
-            <a href="/admin" className="flex items-center justify-center w-full">
-              <Image draggable={false} src={Logo} alt="logo" width={150} className="mt-2"/>
-            </a>
-          </nav>
+  const logout  = () => {
+    push("/login")
+  }
 
-          <button type="button" id="account-settings" className="flex items-center h-10 lg:w-full lg:h-auto justify-between p-3 bg-neutral-900 border border-neutral-900 hover:bg-transparent rounded-lg transition-colors ease-in duration-100">
-            <div className="flex items-center gap-3">
-              <img src="https://cravatar.eu/helmavatar/Bautitz/40.png" alt="avatar" className="rounded-full w-7 h-7 lg:w-10 lg:h-10" />
-              <div className="flex items-center text-xl font-bold ">
-                <span className="overflow-hidden max-w-[128px] text-ellipsis whitespace-nowrap">Vinicius</span>
-              </div>
-            </div>
+  return (
+    <div id="sidebar-container" className="
+      h-20 w-full
+      py-3
+      px-6
+    
+      flex
+      items-center
+      justify-between
 
-            <ChevronUp strokeWidth={3} />
-          </button>
-        </div>
+      border-b
+      border-neutral-800
 
-      </div>
-    )
+      bg-neutral-950
+    ">
+
+      <Link href="/admin"> <Image src={Logo} height={40} alt="logo"></Image> </Link>
+      <button type="button" onClick={logout} className="w-32 sm:w-48 p-3 flex justify-start items-center gap-3 rounded-lg bg-neutral-800">
+        <span className="flex-auto text-start overflow-hidden text-ellipsis whitespace-nowrap font-bold text-lg">Vinicius</span>
+        <LogOut strokeWidth={2}/>
+      </button>
+    </div>
+  )
 }
 
 export default SidebarElement

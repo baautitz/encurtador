@@ -66,7 +66,7 @@ export default function Admin() {
   }
 
   return (
-    <div id="container" className="box-border flex flex-col lg:flex-row h-screen text-white ">
+    <div className="box-border flex flex-col  h-screen text-white ">
       <Head>
         <title>Bautitz | Admin</title>
       </Head>
@@ -76,13 +76,13 @@ export default function Admin() {
       <div id="main-container" className="flex-auto lg:px-6 flex flex-col bg-black overflow-y-auto">
 
         <div className="flex-auto flex flex-col justify-center items-center lg:min-w-[600px] min-h-[600px] lg:space-y-3">
-          <span className="text-5xl font-bold py-3 lg:py-0 hidden lg:inline">editar links</span>
-          <div id="links-container" className="bg-neutral-950 lg:min-w-[640px] max-w-[1000px] w-full lg:w-4/5 p-6 flex-auto lg:flex-none h-5/6 lg:border border-neutral-900 lg:rounded-lg flex flex-col space-y-6">
+          <div id="links-container" className="bg-neutral-950 lg:min-w-[640px] max-w-[1000px] w-full lg:w-4/5 p-6 flex-auto lg:flex-none h-5/6 lg:border border-neutral-800 lg:rounded-lg flex flex-col space-y-6">
+            <span className="text-5xl font-bold text-center">editar links</span>
 
             <form id="links-add" className="space-y-2 lg:space-y-0 lg:space-x-3 flex flex-col lg:flex-row">
-              <input type="text" ref={linkNameInput} onKeyDown={e => createLinkFromInput(e)} placeholder="nome" className="lg:w-48 p-2 rounded-lg border border-neutral-900 bg-transparent focus:border-white outline-none" />
-              <div className="flex-auto rounded-lg flex border border-neutral-900 focus-within:border-white">
-                <input type="text" placeholder="link" defaultValue="http://" disabled className="p-2 w-[67px] rounded-l-lg bg-neutral-900 text-zinc-400" />
+              <input type="text" ref={linkNameInput} onKeyDown={e => createLinkFromInput(e)} placeholder="nome" className="lg:w-48 p-2 rounded-lg border border-neutral-800 bg-transparent focus:border-white outline-none" />
+              <div className="flex-auto rounded-lg flex border border-neutral-800 focus-within:border-white">
+                <input type="text" placeholder="link" defaultValue="http://" disabled className="p-2 w-[67px] rounded-l-md bg-neutral-800 text-white" />
                 <input type="text" ref={linkInput} onKeyDown={e => createLinkFromInput(e)} placeholder="link" className="flex-auto p-2 w-full rounded-r-lg bg-transparent outline-none" />
               </div>
               <button type="button" onClick={createLink} className="bg-sky-600 rounded-lg p-2 border border-sky-600 hover:bg-sky-600/30 transition-colors ease-in duration-100">adicionar</button>
