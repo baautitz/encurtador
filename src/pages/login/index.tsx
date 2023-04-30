@@ -1,10 +1,43 @@
 import Head from "next/head";
 import Link from "next/link";
+import axios from "axios";
+import Router from 'next/router';
+
+import { useCookies } from 'react-cookie'
+import { useEffect, useRef, useState } from "react";
 
 import Logo from "../../../public/logo-big-name.svg"
 import Image from "next/image";
 
+import MessageBoxElement, { showMessageBox } from "@/elements/MessageBoxElement";
+import { redirect } from "next/dist/server/api-utils";
+
+
 function Login() {
+    const username = useRef<any>();
+    const password = useRef<any>();
+
+    const [cookies, setCookie, removeCookie] = useCookies(['id']);
+
+    const enterLogin = (e: any) => {
+        if (e.key == "Enter") login()
+    }
+
+    const login = () => {
+        axios.post("/api/auth/", {
+            username: username.current.value, password: password.current.value
+        }).then(res => {
+            setCookie("id", res.data.id, {
+                path: '/',
+            })
+            Router.push("/admin")
+        }).catch(e => {
+            if (e.response.status == 401) {
+                showMessageBox("Usuário ou senha inválido")
+            } else showMessageBox("Ocorreu um erro ao efetuar login")
+        })
+    }
+
     return (
         <div className="
             h-screen
@@ -52,7 +85,7 @@ function Login() {
                         <h2 className="text-xl text-neutral-500">Insira seus dados para continuar</h2>
                     </div>
                     <div className="flex flex-col space-y-2 w-full">
-                        <input type="text" name="user" id="user-input" placeholder="Usuário" className="
+                        <input ref={username} type="text" name="user" id="user-input" placeholder="Usuário" className="
                             p-2
 
                             border
@@ -67,7 +100,7 @@ function Login() {
                             ease-in
                             duration-100
                         "/>
-                        <input type="password" name="password" id="password-input" placeholder="Senha" className="
+                        <input ref={password} onKeyDown={e => enterLogin(e)} type="password" name="password" id="password-input" placeholder="Senha" className="
                             p-2
 
                             border
@@ -85,7 +118,8 @@ function Login() {
                     </div>
                     <div className="select-none w-full flex justify-between">
                         <Image draggable={false} src={Logo} width={120} alt="logo" />
-                        <Link href="admin" className="
+
+                        <button onClick={login} type="button" className="
                             w-20
                             p-2
                             self-end
@@ -102,13 +136,12 @@ function Login() {
                             transition
                             ease-in
                             duration-100
-                        ">
-                            <button type="button" >
-                                Login
-                            </button>
-                        </Link>
+                        " >
+                            entrar
+                        </button>
                     </div>
                 </form>
+                <MessageBoxElement />
             </div>
         </div>
     )

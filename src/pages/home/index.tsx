@@ -17,7 +17,7 @@ export default function Home() {
     return (
         <div className="
             h-screen
-            min-h-[400px]
+            min-h-[450px]
 
             flex 
             flex-col 
