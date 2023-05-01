@@ -1,18 +1,17 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { v4 as uuid } from 'uuid';
 
-import { loggedUsers } from './index';
+import LoggedUser from '@/entities/LoggedUser';
 
 export default async function middleware(req: NextApiRequest, res: NextApiResponse) {
+    const token: string | undefined = req.headers["token"] as string | undefined
 
-    const id = req.headers["id"]
-    const user = loggedUsers.find((user: any) => user.id == (id || ""))
+    if (!token) return res.status(401).json({ error: "Please, provide a valid token" })
+
+    const user = LoggedUser.getUser(token)
 
     if (!user) {
         return res.status(401).json({ error: "Invalid token" })
     }
 
-    const findedUser = loggedUsers.find((u: any) => u.id == user.id)
-    
-    res.status(200).json(findedUser)
+    res.status(200).json(user)
 }

@@ -17,7 +17,7 @@ function Login() {
     const username = useRef<any>();
     const password = useRef<any>();
 
-    const [cookies, setCookie, removeCookie] = useCookies(['id']);
+    const [cookies, setCookie, removeCookie] = useCookies(['token']);
 
     const enterLogin = (e: any) => {
         if (e.key == "Enter") login()
@@ -27,7 +27,7 @@ function Login() {
         axios.post("/api/auth/", {
             username: username.current.value, password: password.current.value
         }).then(res => {
-            setCookie("id", res.data.id, {
+            setCookie("token", res.data.token, {
                 path: '/',
             })
             Router.push("/admin")
@@ -48,6 +48,7 @@ function Login() {
             justify-center
             items-center
             bg-black
+            text-white
         ">
             <Head>
                 <title>Bautitz | Login</title>
