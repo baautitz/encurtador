@@ -48,7 +48,7 @@ export default function Home() {
                 <title>Bautitz | Perfil</title>
             </Head>
 
-            <div className="h-screen min-h-[450px] flex flex-col justify-center items-center">
+            <div className="h-screen min-h-[450px] flex flex-col justify-center items-center bg-black text-white">
 
                 <div className="w-full h-full flex flex-col items-center justify-center p-6 gap-3 bg-neutral-950 border border-neutral-800 shadow-[0_0_15px_0_rgba(38,38,38,.5)] md:rounded-lg md:max-w-lg md:h-fit">
 

@@ -5,7 +5,7 @@ export default function Document() {
     <Html lang="pt-br" className="[color-scheme:dark]">
       <Head />    
       <link rel="icon" href="/favicon.svg" /> 
-      <body className="bg-black text-white">
+      <body>
         <Main />
         <NextScript />
       </body>
