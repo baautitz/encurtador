@@ -9,7 +9,7 @@ import { useEffect, useRef, useState } from "react";
 import Logo from "../../../public/logo-big-name.svg"
 import Image from "next/image";
 
-import MessageBoxElement, { showMessageBox } from "@/elements/MessageBoxElement";
+import MessageBoxComponent, { showMessageBox } from "@/pages/components/MessageBoxComponent";
 import { redirect } from "next/dist/server/api-utils";
 
 
@@ -24,18 +24,18 @@ function Login() {
     }
 
     const login = () => {
-        axios.post("/api/auth/", {
-            username: username.current.value, password: password.current.value
-        }).then(res => {
-            setCookie("token", res.data.token, {
-                path: '/',
-            })
-            Router.push("/admin")
-        }).catch(e => {
-            if (e.response.status == 401) {
-                showMessageBox("Usuário ou senha inválido")
-            } else showMessageBox("Ocorreu um erro ao efetuar login")
-        })
+        // axios.post("/api/auth/", {
+        //     username: username.current.value, password: password.current.value
+        // }).then(res => {
+        //     setCookie("token", res.data.token, {
+        //         path: '/',
+        //     })
+        //     Router.push("/admin")
+        // }).catch(e => {
+        //     if (e.response.status == 401) {
+        //         showMessageBox("Usuário ou senha inválido")
+        //     } else showMessageBox("Ocorreu um erro ao efetuar login")
+        // })
     }
 
     return (
@@ -142,7 +142,7 @@ function Login() {
                         </button>
                     </div>
                 </form>
-                <MessageBoxElement />
+                <MessageBoxComponent />
             </div>
         </div>
     )

@@ -3,10 +3,9 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import Link from "next/link";
 
-import Logo from "../../public/logo-big-name.svg"
+import Logo from "../../../public/logo-big-name.svg"
 import { LogOut } from "lucide-react";
 import { useCookies } from "react-cookie";
-import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 
 function SidebarElement() {
@@ -17,10 +16,10 @@ function SidebarElement() {
   const userLoaded = useRef(false)
 
   const fetchUser = () => {
-    const instance = axios.create({ headers: { 'token': cookies.token } })
-    instance.get("/api/auth/verify").then(res => {
-      setUser(res.data.name)
-    })
+    // const instance = axios.create({ headers: { 'token': cookies.token } })
+    // instance.get("/api/auth/verify").then(res => {
+    //   setUser(res.data.name)
+    // })
   }
 
   useEffect(() => {
@@ -31,9 +30,9 @@ function SidebarElement() {
   })
 
   const logout = () => {
-    axios.post("/api/auth/logout", { token: cookies.token }).then((res) => {
-      push("/admin/login")
-    }).catch()
+    // axios.post("/api/auth/logout", { token: cookies.token }).then((res) => {
+    //   push("/admin/login")
+    // }).catch()
   }
 
   return (

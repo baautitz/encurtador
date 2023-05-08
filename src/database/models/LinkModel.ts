@@ -1,0 +1,28 @@
+import mongoose, { Model, Schema } from "mongoose"
+
+type Link = {
+    id: string
+    name: string,
+    link: string,
+    author?: string,
+    createdAt: string,
+    updatedAt: string
+}
+
+const LinkSchema = new Schema<Link>({
+    name: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    link: {
+        type: String,
+        required: true
+    },
+    author: String,
+}, { timestamps: true })
+
+const LinkModel: Model<Link> = mongoose.models.LinkModel || mongoose.model("LinkModel", LinkSchema, "links")
+
+export type { Link }
+export default LinkModel

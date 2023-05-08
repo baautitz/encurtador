@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-import dbConnection from '../../../services/DbConnection'
-import Link from '../../../models/Link'
+import dbConnection from '../../../database/DbConnection'
+import Link from '../../../database/models/LinkModel'
 
 dbConnection()
 

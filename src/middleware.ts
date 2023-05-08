@@ -1,32 +1,36 @@
 import { NextResponse } from 'next/server'
 import { NextRequest } from 'next/server'
 
-export async function middleware(req: NextRequest, res: any) {
-  const pages = ["admin", "api", "_next", "home", "favicon.svg"]
-  let link = req.nextUrl.pathname.toLocaleLowerCase().replace("/", "")
+const routes = ["admin", "api", "favicon.svg", "_next"]
 
-  let logged = false;
+export async function middleware(req: NextRequest): Promise<NextResponse> {
+  let reqPathsList = req.nextUrl.pathname.substring(1).split("/")
 
-  const verifyLogin = await fetch(process.env.API_BASE_URL + "/auth/verify", {
-    method: "GET",
-    headers: { "token": req.cookies.get("token")?.value || "" },
-  });
-  const response = await verifyLogin.json()
-
-  if (response.token) logged = true
-
-  if (link.split("/")[0] == "admin") {
-    if (logged && link.split("/")[1] == "login") {
-      return NextResponse.redirect(new URL(`/admin`, req.url))
-    }
-
-    if (!logged && link.split("/")[1] != "login") {
-      return NextResponse.rewrite(new URL(`/admin/login`, req.url))
-    }
+  if (!reqPathsList[0]) {
+    return NextResponse.next();
   }
 
-  if (pages.includes(link.split("/")[0].toLowerCase())) return;
-  if (!link) return NextResponse.redirect(new URL("/home", req.url));
+  if (!routes.includes(reqPathsList[0])) {
+    return NextResponse.rewrite(new URL(`/api/links/redirect/${req.nextUrl.pathname.replace("/", "")}`, req.url))
+  }
 
-  return NextResponse.rewrite(new URL(`/api/redirect/${req.nextUrl.pathname.replace("/", "")}`, req.url))
+  if (reqPathsList[0] == "admin") {
+    return await adminMiddleware(req, reqPathsList)
+  }
+
+  return NextResponse.next()
+}
+
+async function adminMiddleware(req: NextRequest, reqPathsList: string[]): Promise<NextResponse> {
+  const logged = false;
+
+  if (!logged && reqPathsList[1] != "login") {
+    return NextResponse.redirect(new URL("/admin/login", req.url))
+  }
+
+  if (logged && reqPathsList[1] == "login") {
+    return NextResponse.redirect(new URL("/admin", req.url))
+  }
+
+  return NextResponse.next()
 }
