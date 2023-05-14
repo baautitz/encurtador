@@ -3,8 +3,6 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import Link from '../../../database/models/LinkModel'
 import LinkRepository from '@/repositories/LinkRepository'
 
-
-
 const executeRequest: any = {
     GET: async (req: NextApiRequest, res: NextApiResponse) => {
         const findedLinks = await LinkRepository.getAllLinks()

@@ -129,9 +129,9 @@ export default function Admin() {
 								ref={linkNameInput}
 								onKeyDown={(e) => createLinkFromInput(e)}
 								placeholder="nome"
-								className="lg:w-48 p-2 rounded-lg border border-neutral-800 bg-transparent focus:border-white outline-none"
+								className="lg:w-48 p-2 rounded-lg border border-neutral-800 bg-transparent focus:border-white outline-none transition ease-in duration-100"
 							/>
-							<div className="flex-auto rounded-lg flex border border-neutral-800 focus-within:border-white">
+							<div className="flex-auto rounded-lg flex border border-neutral-800 focus-within:border-white transition ease-in duration-100">
 								<input
 									type="text"
 									placeholder="link"
