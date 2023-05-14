@@ -22,7 +22,7 @@ export async function middleware(req: NextRequest): Promise<NextResponse> {
 }
 
 async function adminMiddleware(req: NextRequest, reqPathsList: string[]): Promise<NextResponse> {
-  const logged = false;
+  const logged = true;
 
   if (!logged && reqPathsList[1] != "login") {
     return NextResponse.redirect(new URL("/admin/login", req.url))
