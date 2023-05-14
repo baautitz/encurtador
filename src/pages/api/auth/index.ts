@@ -1,8 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { v4 as uuid } from 'uuid';
 
-import UsersDB from "../../../../users.json"
-
 export default async function middleware(req: NextApiRequest, res: NextApiResponse) {
     switch (req.method) {
         // case "POST":
