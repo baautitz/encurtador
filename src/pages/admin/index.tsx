@@ -120,7 +120,7 @@ export default function Admin() {
 	return (
 		<div className="box-border flex flex-col  h-screen text-white ">
 			<Head>
-				<title>vnici.us | Admin</title>
+				<title>Admin | vnici.us</title>
 			</Head>
 
 			<HeaderbarComponent />
