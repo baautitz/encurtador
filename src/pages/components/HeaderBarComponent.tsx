@@ -1,4 +1,4 @@
-import { useRouter } from "next/router";
+import { useRouter } from "next/router"
 
 import Image from "next/image";
 import Link from "next/link";
@@ -7,19 +7,20 @@ import Logo from "../../../public/logo-big-name.svg"
 import { LogOut } from "lucide-react";
 import { useCookies } from "react-cookie";
 import { useEffect, useRef, useState } from "react";
+import axios from "axios";
 
-function SidebarElement() {
-  const { push } = useRouter();
-  const [cookies, setCookie, removeCookie] = useCookies(['token']);
+function HeaderBarElement() {
+  const router = useRouter()
 
+  const [cookies] = useCookies(['authorization']);
   const [user, setUser] = useState()
+
   const userLoaded = useRef(false)
 
   const fetchUser = () => {
-    // const instance = axios.create({ headers: { 'token': cookies.token } })
-    // instance.get("/api/auth/verify").then(res => {
-    //   setUser(res.data.name)
-    // })
+    axios.get(`/api/auth/verify`, { params: { authorization: cookies.authorization } }).then(res => {
+      setUser(res.data.content.user.fullName)
+    })
   }
 
   useEffect(() => {
@@ -30,9 +31,9 @@ function SidebarElement() {
   })
 
   const logout = () => {
-    // axios.post("/api/auth/logout", { token: cookies.token }).then((res) => {
-    //   push("/admin/login")
-    // }).catch()
+    axios.post("/api/auth/logout", { authorization: cookies.authorization }).then((res) => {
+      router.reload()
+    }).catch()
   }
 
   return (
@@ -52,7 +53,7 @@ function SidebarElement() {
     ">
 
       <Link href="/admin"> <Image src={Logo} height={40} alt="logo"></Image> </Link>
-      <button type="button" onClick={logout} className="w-32 sm:w-48 p-3 flex justify-start items-center gap-3 rounded-lg bg-neutral-800">
+      <button type="button" onClick={logout} className="h-full w-32 sm:w-48 p-3 flex justify-start items-center gap-3 rounded-lg bg-neutral-800">
         <span className="flex-auto text-start overflow-hidden text-ellipsis whitespace-nowrap font-bold text-lg">{user}</span>
         <LogOut strokeWidth={2} />
       </button>
@@ -61,4 +62,4 @@ function SidebarElement() {
   )
 }
 
-export default SidebarElement
+export default HeaderBarElement

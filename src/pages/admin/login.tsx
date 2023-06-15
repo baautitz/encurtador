@@ -12,32 +12,49 @@ import Image from "next/image"
 import MessageBoxComponent, {
 	showMessageBox,
 } from "@/pages/components/MessageBoxComponent"
+import dbConnection from "@/database/DbConnection"
 
-function Login() {
+export async function getServerSideProps(context: any) {
+	dbConnection()
+	const authorizationCookie = context.req.cookies["authorization"]
+
+	if (authorizationCookie)
+		return {
+			redirect: {
+				permanent: false,
+				destination: "/admin",
+			},
+		}
+
+	return { props: { } }
+}
+
+export default function Login() {
 	const username = useRef<any>()
 	const password = useRef<any>()
 
-	const [cookies, setCookie, removeCookie] = useCookies(["token"])
+	const [cookies, setCookie, removeCookie] = useCookies(["authorization"])
 
 	const enterLogin = (e: any) => {
 		if (e.key == "Enter") login()
 	}
 
 	const login = () => {
-		
+		axios.post("/api/auth/", {
+		    username: username.current.value, password: password.current.value
+		}).then(res => {
+		    setCookie("authorization", res.data.content.authorization, {
+		        path: '/',
+		    })
+		    Router.push("/admin")
+		}).catch(e => {
+		    if (e.response.status == 401) {
+		        showMessageBox("Usuário e/ou senha inválido(s)", "bg-red-600")
+		    } else if (e.response.status == 400) {
+		        showMessageBox("Usuário e/ou senha inválido(s)", "bg-red-600")
+			} else showMessageBox("Ocorreu um erro ao efetuar login", "bg-red-600")
+		})
 
-		// axios.post("/api/auth/", {
-		//     username: username.current.value, password: password.current.value
-		// }).then(res => {
-		//     setCookie("token", res.data.token, {
-		//         path: '/',
-		//     })
-		//     Router.push("/admin")
-		// }).catch(e => {
-		//     if (e.response.status == 401) {
-		//         showMessageBox("Usuário e/ou senha inválido(s)")
-		//     } else showMessageBox("Ocorreu um erro ao efetuar login")
-		// })
 	}
 
 	return (
@@ -176,5 +193,3 @@ function Login() {
 		</div>
 	)
 }
-
-export default Login

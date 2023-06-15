@@ -8,6 +8,9 @@ export default async function middleware(
 	req: NextApiRequest,
 	res: NextApiResponse
 ) {
+	if (req.method != "POST")
+		return res.status(405).json({ error: "405 - Method Not Allowed" })
+
 	const { authorization } = req.body
 
 	if (!authorization)
