@@ -16,6 +16,7 @@ export default function HeaderBarElement({ fullName }: any) {
 		axios.post("/api/auth/logout", { authorization: cookies.authorization })
       .then(() => router.reload())
       .catch(() => router.reload())
+		router.reload()
 	}
 
 	return (
