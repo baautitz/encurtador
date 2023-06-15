@@ -12,6 +12,8 @@ import MessageBoxComponent, {
 import AuthorizationModel from "@/database/models/AuthorizationModel"
 import dbConnection from "@/database/DbConnection"
 import { useCookies } from "react-cookie"
+import UserModel from "@/database/models/UserModel"
+import { InferGetServerSidePropsType } from "next"
 
 export async function getServerSideProps(context: any) {
 	dbConnection()
@@ -44,12 +46,22 @@ export async function getServerSideProps(context: any) {
 		}
 	}
 
+	const findedUser = await UserModel.findOne({
+		username: findedAuthorization.username,
+	}).select("-password")
+
+	if (!findedUser) return { props: {} }	
 	return {
-		props: {},
+		props: {
+			user: {
+				username: findedUser.username,
+				fullName: findedUser.fullName,
+			},
+		},
 	}
 }
 
-export default function Admin() {
+export default function Admin({user}: any) {
 	const [linkList, setLinkList] = useState<any>([])
 	let linksLoaded = useRef(false)
 
@@ -57,7 +69,6 @@ export default function Admin() {
 
 	const linkNameInput = useRef<any>(null)
 	const linkInput = useRef<any>(null)
-
 	useEffect(() => {
 		if (!linksLoaded.current) {
 			fetchLinks()
@@ -123,7 +134,7 @@ export default function Admin() {
 				<title>Admin | vnici.us</title>
 			</Head>
 
-			<HeaderbarComponent />
+			<HeaderbarComponent fullName={user?.fullName} />
 
 			<div
 				id="main-container"
