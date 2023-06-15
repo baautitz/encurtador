@@ -7,6 +7,7 @@ import Logo from "../../../public/logo-big-name.svg"
 import { LogOut } from "lucide-react"
 import { useCookies } from "react-cookie"
 import axios from "axios"
+import { useEffect } from "react"
 
 export default function HeaderBarElement({ fullName }: any) {
 	const router = useRouter()
@@ -14,9 +15,10 @@ export default function HeaderBarElement({ fullName }: any) {
 
 	const logout = () => {
 		axios.post("/api/auth/logout", { authorization: cookies.authorization })
-      .then(() => router.push("/admin/login"))
-      .catch(() => router.push("/admin/login"))
+    window.location.reload()
 	}
+
+
 
 	return (
 		<div
