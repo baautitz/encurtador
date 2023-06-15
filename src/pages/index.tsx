@@ -11,7 +11,7 @@ import WavingHandEmoji from "../../public/waving-hand-emoj.svg"
 import Logo from "../../public/logo-big-name.svg"
 
 function discordButtonClickHandler() {
-    navigator.clipboard.writeText("vini.#9999")
+    navigator.clipboard.writeText("vnicius.")
     showMessageBox("Discord copiado!")
 }
 
@@ -35,7 +35,7 @@ function socialMedia() {
 
             <button type="button" onClick={discordButtonClickHandler} className="w-40 flex items-center p-2 gap-3 border rounded-lg border-sky-700 shadow-[0_0_8px_0_rgba(3,105,161,.5)] hover:bg-sky-700/30 transition-all ease-in duration-100">
                 <Image draggable={false} alt="DiscordLogo" src={DiscordLogo} width={30} />
-                vini.#9999
+                vnicius.
             </button>
         </>
     )
