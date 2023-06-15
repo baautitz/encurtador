@@ -55,14 +55,14 @@ function LinkElement(props: {
 			<div className="space-x-3 self-end lg:self-auto">
 				<button
 					type="button"
-					className="w-fit lg:w-auto bg-green-500 rounded-lg p-2 border border-green-500 hover:bg-green-600/30 transition-colors ease-in duration-100"
+					className="w-fit lg:w-auto bg-green-600 rounded-lg p-2 border border-green-600 hover:bg-green-600/30 transition-colors ease-in duration-100"
 				>
 					editar
 				</button>
 				<button
 					type="button"
 					onClick={deleteLink}
-					className="w-fit lg:w-auto bg-red-500 rounded-lg p-2 border border-red-500 hover:bg-red-600/30 transition-colors ease-in duration-100"
+					className="w-fit lg:w-auto bg-red-600 rounded-lg p-2 border border-red-600 hover:bg-red-600/30 transition-colors ease-in duration-100"
 				>
 					excluir
 				</button>

@@ -134,7 +134,7 @@ export default function Admin({user}: any) {
 				<title>Admin | vnici.us</title>
 			</Head>
 
-			<HeaderbarComponent fullName={user?.fullName} />
+			<HeaderbarComponent fullName={user?.fullName.split(" ")[0]} />
 
 			<div
 				id="main-container"
@@ -197,7 +197,7 @@ export default function Admin({user}: any) {
 
 						<button
 							type="button"
-							className="self-end bg-yellow-500 rounded-lg p-2 border border-yellow-500 hover:bg-yellow-600/30 transition-colors ease-in duration-100"
+							className="self-end bg-yellow-600 rounded-lg p-2 border border-yellow-600 hover:bg-yellow-600/30 transition-colors ease-in duration-100"
 						>
 							salvar alterações
 						</button>

@@ -18,12 +18,8 @@ export default function HeaderBarElement({ fullName }: any) {
 	const [cookies] = useCookies(["authorization"])
 
 	const logout = () => {
-		axios
-			.post("/api/auth/logout", { authorization: cookies.authorization })
-			.then((res) => {
-				router.reload()
-			})
-			.catch((error) => router.reload())
+		axios.post("/api/auth/logout", { authorization: cookies.authorization })
+		router.reload()
 	}
 
 	return (
@@ -42,6 +38,7 @@ export default function HeaderBarElement({ fullName }: any) {
       border-neutral-800
 
       bg-neutral-950
+      
     "
 		>
 			<Link href="/admin">
@@ -51,7 +48,7 @@ export default function HeaderBarElement({ fullName }: any) {
 			<button
 				type="button"
 				onClick={logout}
-				className="h-full w-32 sm:w-48 p-3 flex justify-start items-center gap-3 rounded-lg bg-neutral-800"
+				className="h-full w-32 sm:w-48 p-3 flex justify-start items-center gap-3 rounded-lg border border-neutral-800 bg-neutral-800 hover:bg-neutral-800/30 duration-100"
 			>
 				<span className="flex-auto text-start overflow-hidden text-ellipsis whitespace-nowrap font-bold text-lg">
 					{fullName}
