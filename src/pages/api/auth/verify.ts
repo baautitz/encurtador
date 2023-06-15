@@ -1,6 +1,9 @@
+import dbConnection from "@/database/DbConnection"
 import AuthorizationModel from "@/database/models/AuthorizationModel"
 import UserModel from "@/database/models/UserModel"
 import type { NextApiRequest, NextApiResponse } from "next"
+
+dbConnection()
 
 export default async function middleware(
 	req: NextApiRequest,
