@@ -13,18 +13,18 @@ const executeRequest: any = {
         let { name, link } = req.body
 
         try {
-            const rg = /[A-Za-z0-9]+([/]{0,1}[A-Za-z0-9-]+)*/g
+            const linkNamePattern = /[A-Za-z0-9]+([/]{0,1}[A-Za-z0-9-]+)*/g
 
             name = name.replaceAll(" ", "")
             link = link.replaceAll(" ", "")
 
-            name = (name.match(rg)) ? name.match(rg)[0] : ""
+            name = (name.match(linkNamePattern)) ? name.match(linkNamePattern)[0] : ""
             name = decodeURI(name)
 
             const createdLink = await Link.create({ name, link })
             res.status(201).json({ message: "Created", createdLink })
         } catch (error: any) {
-            res.status(400).json(error)
+            res.status(400).json({error})
         }
     }
 }
@@ -34,7 +34,7 @@ export default async function middleware(req: NextApiRequest, res: NextApiRespon
     const requestFunction = executeRequest[method]
 
     if (!requestFunction) {
-        res.status(405).json({ error: "Method Not Allowed" })
+        res.status(405).json({ error: "405 - Method Not Allowed" })
     }
 
     await requestFunction(req, res)

@@ -12,7 +12,6 @@ import Image from "next/image"
 import MessageBoxComponent, {
 	showMessageBox,
 } from "@/pages/components/MessageBoxComponent"
-import { redirect } from "next/dist/server/api-utils"
 
 function Login() {
 	const username = useRef<any>()
@@ -25,6 +24,8 @@ function Login() {
 	}
 
 	const login = () => {
+		
+
 		// axios.post("/api/auth/", {
 		//     username: username.current.value, password: password.current.value
 		// }).then(res => {
@@ -34,7 +35,7 @@ function Login() {
 		//     Router.push("/admin")
 		// }).catch(e => {
 		//     if (e.response.status == 401) {
-		//         showMessageBox("Usuário ou senha inválido")
+		//         showMessageBox("Usuário e/ou senha inválido(s)")
 		//     } else showMessageBox("Ocorreu um erro ao efetuar login")
 		// })
 	}
@@ -51,7 +52,8 @@ function Login() {
             items-center
             bg-black
             text-white
-        ">
+        "
+		>
 			<Head>
 				<title>Bautitz | Login</title>
 			</Head>
@@ -65,7 +67,8 @@ function Login() {
                 flex 
                 flex-col  
                 items-center
-            ">
+            "
+			>
 				<form
 					className="
                     h-full 
@@ -84,7 +87,8 @@ function Login() {
                     sm:rounded-lg
                     bg-neutral-950
                     
-                ">
+                "
+				>
 					<div className="flex flex-col items-center gap-3">
 						<h1 className="text-5xl font-bold">login</h1>
 						<h2 className="text-xl text-neutral-500">
@@ -139,12 +143,7 @@ function Login() {
 						/>
 					</div>
 					<div className="select-none w-full flex justify-between">
-						<Image
-							draggable={false}
-							src={Logo}
-							width={120}
-							alt="logo"
-						/>
+						<Image draggable={false} src={Logo} width={120} alt="logo" />
 
 						<button
 							onClick={login}
@@ -166,7 +165,8 @@ function Login() {
                             transition
                             ease-in
                             duration-100
-                        ">
+                        "
+						>
 							entrar
 						</button>
 					</div>

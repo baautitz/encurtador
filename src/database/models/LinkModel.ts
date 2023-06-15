@@ -5,8 +5,8 @@ type Link = {
 	name: string
 	link: string
 	author?: string
-	createdAt: string
-	updatedAt: string
+	createdAt?: string
+	updatedAt?: string
 }
 
 const LinkSchema = new Schema<Link>(
