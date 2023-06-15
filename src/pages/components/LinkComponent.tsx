@@ -32,7 +32,7 @@ function LinkElement(props: {
 	}
 
 	const copyLink = () => {
-		navigator.clipboard.writeText(`https://vnci.us/${props.nome}`)
+		navigator.clipboard.writeText(`https://vnici.us/${props.nome}`)
 		props.onCopy(`Link /${props.nome} copiado!`)
 	}
 	return (
