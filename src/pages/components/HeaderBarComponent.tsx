@@ -6,12 +6,7 @@ import Link from "next/link"
 import Logo from "../../../public/logo-big-name.svg"
 import { LogOut } from "lucide-react"
 import { useCookies } from "react-cookie"
-import { useEffect, useRef, useState } from "react"
 import axios from "axios"
-import { error } from "console"
-import AuthorizationModel from "@/database/models/AuthorizationModel"
-import UserModel from "@/database/models/UserModel"
-import { InferGetServerSidePropsType } from "next"
 
 export default function HeaderBarElement({ fullName }: any) {
 	const router = useRouter()
@@ -19,7 +14,8 @@ export default function HeaderBarElement({ fullName }: any) {
 
 	const logout = () => {
 		axios.post("/api/auth/logout", { authorization: cookies.authorization })
-		router.reload()
+      .then(() => router.reload())
+      .catch(() => router.reload())
 	}
 
 	return (
