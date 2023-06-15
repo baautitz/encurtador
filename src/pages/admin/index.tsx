@@ -1,8 +1,8 @@
 import Head from "next/head"
-import axios from "axios"
+import axios, { AxiosError } from "axios"
 import { useEffect, useRef, useState } from "react"
 
-import { Loader2 } from "lucide-react"
+import { CopySlash, Loader2 } from "lucide-react"
 
 import LinkComponent from "../components/LinkComponent"
 import HeaderbarComponent from "../components/HeaderBarComponent"
@@ -11,6 +11,7 @@ import MessageBoxComponent, {
 } from "../components/MessageBoxComponent"
 import AuthorizationModel from "@/database/models/AuthorizationModel"
 import dbConnection from "@/database/DbConnection"
+import { useCookies } from "react-cookie"
 
 export async function getServerSideProps(context: any) {
 	dbConnection()
@@ -30,7 +31,10 @@ export async function getServerSideProps(context: any) {
 	})
 
 	if (!findedAuthorization) {
-		context.res.setHeader('Set-Cookie', 'authorization=invalidAuthorization; Max-Age=0');
+		context.res.setHeader(
+			"Set-Cookie",
+			"authorization=invalidAuthorization; Max-Age=0"
+		)
 
 		return {
 			redirect: {
@@ -39,7 +43,6 @@ export async function getServerSideProps(context: any) {
 			},
 		}
 	}
-		
 
 	return {
 		props: {},
@@ -49,6 +52,8 @@ export async function getServerSideProps(context: any) {
 export default function Admin() {
 	const [linkList, setLinkList] = useState<any>([])
 	let linksLoaded = useRef(false)
+
+	const [cookie, setCookie] = useCookies(["authorization"])
 
 	const linkNameInput = useRef<any>(null)
 	const linkInput = useRef<any>(null)
@@ -71,23 +76,37 @@ export default function Admin() {
 	}
 
 	const createLink = () => {
-		// let linkNameValue = linkNameInput.current.value
-		// const linkValue = linkInput.current.value
-		// const rg = /[A-Za-z0-9]+([/]{0,1}[A-Za-z0-9-]+)*/g
-		// linkNameValue = (linkNameValue.match(rg)) ? linkNameValue.match(rg)[0] : ""
-		// if (!linkNameValue.trim() || !linkValue.trim()) return;
-		// let refinedLinkValue: string = linkValue.trim()
-		// if (!refinedLinkValue.startsWith("http://") && !refinedLinkValue.startsWith("https://")) {
-		//   refinedLinkValue = `http://${refinedLinkValue}`
-		// }
-		// axios.post("/api/links", {
-		//   name: linkNameValue.trim(),
-		//   link: refinedLinkValue
-		// }).then(() => {
-		//   fetchLinks()
-		//   linkNameInput.current.value = ""
-		//   linkInput.current.value = ""
-		// })
+		let linkNameValue = linkNameInput.current.value
+		const linkValue = linkInput.current.value
+
+		const rg = /[A-Za-z0-9]+([/]{0,1}[A-Za-z0-9-]+)*/g
+
+		linkNameValue = linkNameValue.match(rg) ? linkNameValue.match(rg)[0] : ""
+		if (!linkNameValue.trim() || !linkValue.trim()) return
+
+		axios
+			.post(
+				"/api/links",
+				{
+					name: linkNameValue.trim(),
+					link: linkValue,
+				},
+				{ headers: { authorization: cookie.authorization } }
+			)
+			.then(() => {
+				fetchLinks()
+				showMessageBox(`Link /${linkNameValue.trim()} criado!`)
+				linkNameInput.current.value = ""
+				linkInput.current.value = ""
+			})
+			.catch((error: AxiosError) => {
+				if (error.response?.status == 409) {
+					showMessageBox(
+						`Link /${linkNameValue.trim()} já existe.`,
+						"bg-red-600"
+					)
+				} else showMessageBox(`Ocorreu um erro inesperado.`, "bg-red-600")
+			})
 	}
 
 	const onDeleteRemoveFromLinksList = (name: string) => {
@@ -100,7 +119,6 @@ export default function Admin() {
 
 	return (
 		<div className="box-border flex flex-col  h-screen text-white ">
-
 			<Head>
 				<title>Bautitz | Admin</title>
 			</Head>

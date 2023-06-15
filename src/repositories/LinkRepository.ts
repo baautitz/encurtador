@@ -42,7 +42,10 @@ class LinkRepository {
 	}
 
 	static async delete(name: string): Promise<boolean> {
-		await LinkModel.deleteOne({ name })
+		const deletedLink = await LinkModel.deleteOne({ name })
+
+		if (deletedLink.deletedCount == 0) return false
+
 		return true
 	}
 }

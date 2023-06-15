@@ -1,41 +1,83 @@
-import type { NextApiRequest, NextApiResponse } from 'next'
+import type { NextApiRequest, NextApiResponse } from "next"
 
-import Link from '../../../database/models/LinkModel'
-import LinkRepository from '@/repositories/LinkRepository'
+import Link from "../../../database/models/LinkModel"
+import LinkRepository from "@/repositories/LinkRepository"
+import AuthorizationModel from "@/database/models/AuthorizationModel"
 
 const executeRequest: any = {
-    GET: async (req: NextApiRequest, res: NextApiResponse) => {
-        const findedLinks = await LinkRepository.getAllLinks()
-        res.status(200).json(findedLinks)
-    },
+	GET: async (req: NextApiRequest, res: NextApiResponse) => {
+		const findedLinks = await LinkRepository.getAllLinks()
+		res.status(200).json(findedLinks)
+	},
 
-    POST: async (req: NextApiRequest, res: NextApiResponse) => {
-        let { name, link } = req.body
+	POST: async (req: NextApiRequest, res: NextApiResponse) => {
+		let { name, link } = req.body
 
-        try {
-            const linkNamePattern = /[A-Za-z0-9]+([/]{0,1}[A-Za-z0-9-]+)*/g
+		if (!name || !link)
+			return res.status(400).json({
+				error: "400 - Bad Request",
+				message: "Name/Link cannot be blank",
+			})
 
-            name = name.replaceAll(" ", "")
-            link = link.replaceAll(" ", "")
+		const findedLink = await LinkRepository.getByName(name)
+		if (findedLink)
+			return res.status(409 ).json({
+				error: "409 - Conflict",
+				message: `Link '${name}' already exists`
+			})
 
-            name = (name.match(linkNamePattern)) ? name.match(linkNamePattern)[0] : ""
-            name = decodeURI(name)
+		const { authorization } = req.headers
+		if (!authorization)
+			return res.status(400).json({
+				error: "400 - Bad Request",
+				message: "Authorization cannot be blank",
+			})
 
-            const createdLink = await Link.create({ name, link })
-            res.status(201).json({ message: "Created", createdLink })
-        } catch (error: any) {
-            res.status(400).json({error})
-        }
-    }
+		const findedAuthorization = await AuthorizationModel.findOne({
+			authorization,
+		})
+
+		if (!findedAuthorization)
+			return res.status(400).json({
+				error: "401 - Unauthorized",
+				message: "Invalid authorization",
+			})
+
+		try {
+			const linkNamePattern = /[A-Za-z0-9]+([/]{0,1}[A-Za-z0-9-]+)*/g
+
+			name = name.replaceAll(" ", "")
+			link = link.replaceAll(" ", "")
+
+			let refinedLinkValue: string = link.trim()
+			if (
+				!refinedLinkValue.startsWith("http://") &&
+				!refinedLinkValue.startsWith("https://")
+			) {
+				refinedLinkValue = `http://${refinedLinkValue}`
+			}
+
+			name = name.match(linkNamePattern) ? name.match(linkNamePattern)[0] : ""
+			name = decodeURI(name)
+
+			const createdLink = await Link.create({ name, link: refinedLinkValue })
+			res.status(201).json({ message: "201 - Created", createdLink })
+		} catch (content: any) {
+			res.status(500).json({ error: "500 - Internal Server Error", content })
+		}
+	},
 }
 
-export default async function middleware(req: NextApiRequest, res: NextApiResponse) {
-    const method = req.method || "";
-    const requestFunction = executeRequest[method]
+export default async function middleware(
+	req: NextApiRequest,
+	res: NextApiResponse
+) {
+	const method = req.method || ""
+	const requestFunction = executeRequest[method]
 
-    if (!requestFunction) {
-        res.status(405).json({ error: "405 - Method Not Allowed" })
-    }
+	if (!requestFunction) {
+		res.status(405).json({ error: "405 - Method Not Allowed" })
+	}
 
-    await requestFunction(req, res)
+	await requestFunction(req, res)
 }

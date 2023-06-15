@@ -8,6 +8,7 @@ import { LogOut } from "lucide-react";
 import { useCookies } from "react-cookie";
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
+import { error } from "console";
 
 function HeaderBarElement() {
   const router = useRouter()
@@ -33,7 +34,7 @@ function HeaderBarElement() {
   const logout = () => {
     axios.post("/api/auth/logout", { authorization: cookies.authorization }).then((res) => {
       router.reload()
-    }).catch()
+    }).catch((error) => router.reload())
   }
 
   return (
