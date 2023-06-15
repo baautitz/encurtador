@@ -13,6 +13,7 @@ import MessageBoxComponent, {
 	showMessageBox,
 } from "@/pages/components/MessageBoxComponent"
 import dbConnection from "@/database/DbConnection"
+import { Loader2 } from "lucide-react"
 
 export async function getServerSideProps(context: any) {
 	dbConnection()
@@ -26,12 +27,15 @@ export async function getServerSideProps(context: any) {
 			},
 		}
 
-	return { props: { } }
+	return { props: {} }
 }
 
 export default function Login() {
-	const username = useRef<any>()
-	const password = useRef<any>()
+	const username = useRef<HTMLInputElement>(null)
+	const password = useRef<HTMLInputElement>(null)
+	const loginButton = useRef<HTMLButtonElement>(null)
+
+	const [fetchingLogin, setFetchingLogin] = useState(false)
 
 	const [cookies, setCookie, removeCookie] = useCookies(["authorization"])
 
@@ -40,21 +44,28 @@ export default function Login() {
 	}
 
 	const login = () => {
-		axios.post("/api/auth/", {
-		    username: username.current.value, password: password.current.value
-		}).then(res => {
-		    setCookie("authorization", res.data.content.authorization, {
-		        path: '/',
-		    })
-		    Router.push("/admin")
-		}).catch(e => {
-		    if (e.response.status == 401) {
-		        showMessageBox("Usuário e/ou senha inválido(s)", "bg-red-600")
-		    } else if (e.response.status == 400) {
-		        showMessageBox("Usuário e/ou senha inválido(s)", "bg-red-600")
-			} else showMessageBox("Ocorreu um erro ao efetuar login", "bg-red-600")
-		})
-
+		loginButton.current?.setAttribute("disabled", "")
+		setFetchingLogin(true)
+		axios
+			.post("/api/auth/", {
+				username: username.current?.value,
+				password: password.current?.value,
+			})
+			.then((res) => {
+				setCookie("authorization", res.data.content.authorization, {
+					path: "/",
+				})
+				Router.push("/admin")
+			})
+			.catch((e) => {
+				loginButton.current?.removeAttribute("disabled")
+				setFetchingLogin(false)
+				if (e.response.status == 401) {
+					showMessageBox("Usuário e/ou senha inválido(s)", "bg-red-600")
+				} else if (e.response.status == 400) {
+					showMessageBox("Usuário e/ou senha inválido(s)", "bg-red-600")
+				} else showMessageBox("Ocorreu um erro ao efetuar login", "bg-red-600")
+			})
 	}
 
 	return (
@@ -163,6 +174,7 @@ export default function Login() {
 						<Image draggable={false} src={Logo} width={120} alt="logo" />
 
 						<button
+							ref={loginButton}
 							onClick={login}
 							type="button"
 							className="
@@ -170,7 +182,9 @@ export default function Login() {
                             p-2
                             self-end
 
-                            text-center
+							flex
+							items-center
+							justify-center
 
                             border
                             border-sky-600
@@ -179,12 +193,15 @@ export default function Login() {
                             bg-sky-600
                             hover:bg-sky-600/30
 
+							disabled:bg-sky-600/30
+							disabled:border-sky-600/30
+
                             transition
                             ease-in
                             duration-100
                         "
 						>
-							entrar
+							{loginButtonText(fetchingLogin)}
 						</button>
 					</div>
 				</form>
@@ -192,4 +209,10 @@ export default function Login() {
 			</div>
 		</div>
 	)
+}
+
+function loginButtonText(fetchingLogin: boolean) {
+	if (fetchingLogin) return <Loader2 strokeWidth={3} className="animate-spin" />
+
+	return "entrar"
 }
