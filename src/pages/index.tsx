@@ -45,7 +45,7 @@ export default function Home() {
     return (
         <>
             <Head>
-                <title>Bautitz | Perfil</title>
+                <title>vnici.us | Perfil</title>
             </Head>
 
             <div className="h-screen min-h-[450px] flex flex-col justify-center items-center bg-black text-white">

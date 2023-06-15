@@ -83,7 +83,7 @@ export default function Login() {
         "
 		>
 			<Head>
-				<title>Bautitz | Login</title>
+				<title>vnici.us | Login</title>
 			</Head>
 			<div
 				className="
