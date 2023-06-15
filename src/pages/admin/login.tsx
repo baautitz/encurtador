@@ -126,6 +126,7 @@ export default function Login() {
 					<div className="flex flex-col space-y-2 w-full">
 						<input
 							ref={username}
+							onKeyDown={(e) => enterLogin(e)}
 							type="text"
 							name="user"
 							id="user-input"
