@@ -172,7 +172,7 @@ export default function Login() {
 						/>
 					</div>
 					<div className="select-none w-full flex justify-between">
-						<Image draggable={false} src={Logo} width={120} alt="logo" />
+						<Image draggable={false} src={Logo} width={130} alt="logo" />
 
 						<button
 							ref={loginButton}

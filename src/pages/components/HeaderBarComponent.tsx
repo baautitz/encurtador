@@ -53,7 +53,7 @@ function HeaderBarElement() {
       bg-neutral-950
     ">
 
-      <Link href="/admin"> <Image src={Logo} height={40} alt="logo"></Image> </Link>
+      <Link href="/admin"> <Image src={Logo} height={45} alt="logo"></Image> </Link>
       <button type="button" onClick={logout} className="h-full w-32 sm:w-48 p-3 flex justify-start items-center gap-3 rounded-lg bg-neutral-800">
         <span className="flex-auto text-start overflow-hidden text-ellipsis whitespace-nowrap font-bold text-lg">{user}</span>
         <LogOut strokeWidth={2} />

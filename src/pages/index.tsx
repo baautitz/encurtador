@@ -66,7 +66,7 @@ export default function Home() {
                         {socialMedia()}
                     </div>
 
-                    <Image draggable={false} src={Logo} alt="Logo" width={100} className="mt-2" />
+                    <Image draggable={false} src={Logo} alt="Logo" width={120} className="mt-2" />
 
                 </div>
                 
