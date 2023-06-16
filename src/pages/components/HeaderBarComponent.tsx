@@ -18,8 +18,6 @@ export default function HeaderBarElement({ fullName }: any) {
     window.location.reload()
 	}
 
-
-
 	return (
 		<div
 			id="sidebar-container"
