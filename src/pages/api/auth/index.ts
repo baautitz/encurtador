@@ -32,7 +32,7 @@ export default async function middleware(
 
 	const authorization = await AuthorizationModel.create({
 		username,
-		authorization: uuidv4(),
+		authorization: uuidv4().replaceAll("-", ""),
 	})
 
 	return res.status(200).json({

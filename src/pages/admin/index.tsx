@@ -134,7 +134,7 @@ export default function Admin({user}: any) {
 				<title>Admin | vnici.us</title>
 			</Head>
 
-			<HeaderbarComponent fullName={user?.fullName.split(" ")[0]} />
+			<HeaderbarComponent fullName={user?.fullName.split(" ")[0]} pageName="links" />
 
 			<div
 				id="main-container"
@@ -194,13 +194,6 @@ export default function Admin({user}: any) {
 								showMessageBox
 							)}
 						</div>
-
-						<button
-							type="button"
-							className="self-end bg-yellow-600 rounded-lg p-2 border border-yellow-600 hover:bg-yellow-600/30 transition-colors ease-in duration-100"
-						>
-							salvar alterações
-						</button>
 					</div>
 
 					<MessageBoxComponent />

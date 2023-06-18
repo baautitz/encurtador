@@ -5,6 +5,7 @@ type Authorization = {
 	username: string
 	authorization: string
 	lastUsed: Date
+	createdAt: Date
 }
 
 const AuthorizationSchema = new Schema<Authorization>(
@@ -16,8 +17,9 @@ const AuthorizationSchema = new Schema<Authorization>(
 		},
 		username: String,
 		lastUsed: { type: Date, default: Date.now },
+		createdAt: { type: Date, default: Date.now, expires: '1d' }
 	},
-	{ timestamps: false }
+	{ timestamps: true }
 )
 
 const AuthorizationModel: Model<Authorization> =

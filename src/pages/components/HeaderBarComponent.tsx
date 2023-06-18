@@ -1,4 +1,4 @@
-import { useRouter } from "next/router"
+import Router from "next/router"
 
 import Image from "next/image"
 import Link from "next/link"
@@ -7,15 +7,37 @@ import Logo from "../../../public/logo-big-name.svg"
 import { LogOut } from "lucide-react"
 import { useCookies } from "react-cookie"
 import axios from "axios"
-import { useEffect } from "react"
+import { useEffect, useRef, useState } from "react"
 
-export default function HeaderBarElement({ fullName }: any) {
-	const router = useRouter()
-	const [cookies] = useCookies(["authorization"])
+export default function HeaderBarElement({ fullName, pageName }: any) {
+	const linksNav = useRef<HTMLDivElement>(null)
 
-	const logout = () => {
+	linksNav.current?.childNodes.forEach((el: any) =>{
+		if (pageName != el.innerHTML) {
+			el.classList.remove("translate-y-[1px]")
+			el.classList.remove("after:relative")
+			el.classList.remove("after:border")
+			el.classList.remove("after:w-full")
+			el.classList.add("text-white/60")
+			el.classList.remove("text-white")
+			
+		} else {
+			el.classList.add("translate-y-[1px]")
+			el.classList.add("after:relative")
+			el.classList.add("after:border")
+			el.classList.add("after:w-full")
+			el.classList.add("text-white")
+			el.classList.remove("text-white/60")
+		}
+	})
+
+	const [page, setPage] = useState()
+	const [cookies, setCookie, removeCookie] = useCookies(["authorization"])
+
+	function logout() {
 		axios.post("/api/auth/logout", { authorization: cookies.authorization })
-    window.location.reload()
+		removeCookie("authorization")
+		Router.reload()
 	}
 
 	return (
@@ -27,6 +49,7 @@ export default function HeaderBarElement({ fullName }: any) {
       px-6
     
       flex
+	  gap-20
       items-center
       justify-between
 
@@ -38,9 +61,22 @@ export default function HeaderBarElement({ fullName }: any) {
     "
 		>
 			<Link href="/admin">
-				{" "}
-				<Image src={Logo} height={45} alt="logo"></Image>{" "}
+				<Image src={Logo} height={45} alt="logo" />
 			</Link>
+			<div ref={linksNav} className="h-full flex-auto hidden md:flex justify-center items-center gap-10 text-lg font-semibold">
+				{/* <Link
+					href="/admin/links"
+					className="text-white/60 h-full flex justify-center items-center flex-col hover:text-white duration-200"
+				>
+					links
+				</Link>
+				<Link
+					href="/admin/users"
+					className="text-white/60 h-full flex justify-center items-center flex-col hover:text-white duration-200"
+				>
+					usuários
+				</Link> */}
+			</div>
 			<button
 				type="button"
 				onClick={logout}

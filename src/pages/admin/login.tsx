@@ -36,7 +36,6 @@ export default function Login() {
 	const loginButton = useRef<HTMLButtonElement>(null)
 
 	const [fetchingLogin, setFetchingLogin] = useState(false)
-
 	const [cookies, setCookie, removeCookie] = useCookies(["authorization"])
 
 	const enterLogin = (e: any) => {
@@ -44,6 +43,10 @@ export default function Login() {
 	}
 
 	const login = () => {
+		const expireDate = new Date()
+		console.log(expireDate.getFullYear() + 10)
+		expireDate.setFullYear(expireDate.getFullYear() + 1)
+
 		loginButton.current?.setAttribute("disabled", "")
 		setFetchingLogin(true)
 		axios
@@ -52,9 +55,7 @@ export default function Login() {
 				password: password.current?.value,
 			})
 			.then((res) => {
-				setCookie("authorization", res.data.content.authorization, {
-					path: "/",
-				})
+				setCookie("authorization", res.data.content.authorization, {expires: expireDate, path: "/"})
 				Router.push("/admin")
 			})
 			.catch((e) => {
