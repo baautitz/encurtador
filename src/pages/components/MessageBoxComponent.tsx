@@ -12,6 +12,10 @@ function MessageBoxElement() {
     showMessageBox = (message: string, backgroundColor?: string) => {
         if (!messageBoxDiv || !messageSpan) return
 
+        messageSpan.current?.classList.forEach((cl: any) => {
+            if (cl.startsWith("bg-")) messageSpan.current?.classList.remove(cl)
+        })
+                                               
         messageSpan.current?.classList.add(backgroundColor || "bg-emerald-600")
         messageBoxDiv.current?.classList.remove("hidden")
 
@@ -27,7 +31,6 @@ function MessageBoxElement() {
             clearTimeout(messageBoxAnimationTimeout[1])
             timeOuts[1] = setTimeout(() => {
                 messageBoxDiv.current?.classList.add("hidden")
-                messageSpan.current?.classList.remove(backgroundColor || "bg-emerald-600")
             }, 150)
         }, 1500))
 
