@@ -84,8 +84,8 @@ export default function Home() {
 
 			<div className="h-screen min-h-[450px] flex flex-col justify-center items-center bg-black text-white">
 				<div className="w-full h-full flex flex-col items-center justify-center p-6 gap-3 bg-neutral-950 border border-neutral-800 shadow-[0_0_15px_0_rgba(38,38,38,.5)] md:rounded-lg md:max-w-lg md:h-fit">
-					<div className="flex flex-col items-center gap-3">
-						<h1 className="text-5xl font-bold flex gap-2">
+					<div className="flex flex-col items-center gap-1">
+						<h1 className="text-5xl font-semibold flex gap-2">
 							Olá!
 							<Image
 								draggable={false}
@@ -94,7 +94,7 @@ export default function Home() {
 								width={40}
 							/>
 						</h1>
-						<h2 className="text-xl font-bold text-center">
+						<h2 className="text-xl font-semibold text-center">
 							Me chamo Vinicius e tenho 18 anos
 						</h2>
 					</div>
