@@ -143,7 +143,7 @@ export default function Admin({user}: any) {
 				<div className="flex-auto flex flex-col justify-center items-center lg:min-w-[600px] min-h-[600px] lg:space-y-3">
 					<div
 						id="links-container"
-						className="bg-neutral-950 lg:min-w-[640px] max-w-[1000px] w-full lg:w-4/5 px-6 p-3 lg:p-6 flex-auto lg:flex-none h-5/6 lg:border border-neutral-800 lg:rounded-lg flex flex-col space-y-3"
+						className="bg-neutral-950 lg:min-w-[640px] max-w-[1000px] w-full lg:w-4/5 px-6 p-3 flex-auto lg:flex-none h-5/6 lg:border border-neutral-800 lg:rounded-lg flex flex-col space-y-3"
 					>
 						<span className="text-5xl font-bold text-center">editar links</span>
 
