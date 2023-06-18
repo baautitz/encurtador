@@ -44,7 +44,7 @@ export default function Login() {
 
 	const login = () => {
 		const expireDate = new Date()
-		console.log(expireDate.getFullYear() + 10)
+
 		expireDate.setFullYear(expireDate.getFullYear() + 1)
 
 		loginButton.current?.setAttribute("disabled", "")
