@@ -5,7 +5,6 @@ export async function getServerSideProps(context: any) {
 	dbConnection()
 
 	const authorizationCookie = context.req.cookies["authorization"]
-
 	if (!authorizationCookie)
 		return {
 			redirect: {
