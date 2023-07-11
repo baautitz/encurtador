@@ -35,9 +35,10 @@ export default function HeaderBarElement({ fullName, pageName }: any) {
 	const [cookies, setCookie, removeCookie] = useCookies(["authorization"])
 
 	function logout() {
-		axios.post("/api/auth/logout", { authorization: cookies.authorization })
+		const authorization = cookies.authorization
 		removeCookie("authorization")
-		Router.reload()
+		axios.post("/api/auth/logout", { authorization }).then(() => Router.reload())
+		
 	}
 
 	return (
