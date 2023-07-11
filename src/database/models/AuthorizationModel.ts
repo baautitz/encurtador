@@ -17,7 +17,7 @@ const AuthorizationSchema = new Schema<Authorization>(
 		},
 		username: String,
 		lastUsed: { type: Date, default: Date.now },
-		createdAt: { type: Date, default: Date.now, expires: '1d' }
+		createdAt: { type: Date, default: Date.now, expires: '30d' }
 	},
 	{ timestamps: true }
 )
