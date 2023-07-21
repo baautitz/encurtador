@@ -2,29 +2,33 @@ import axios, { Axios, AxiosError } from "axios"
 import { useCookies } from "react-cookie"
 import { showMessageBox } from "./MessageBoxComponent"
 import { error } from "console"
+import { useRef } from "react"
 
 function LinkElement(props: {
 	key: string
 	id: string
 	nome: string
 	link: string
-	onDelete: any[]
+	onDeleteFetchLinks: any
 	onCopy: any
 }) {
 	const [cookie, setCookie] = useCookies(["authorization"])
+	const excluirButton = useRef<HTMLButtonElement>(null)
 
 	const deleteLink = () => {
-		props.onDelete[0](props.nome)
+		excluirButton.current?.setAttribute("disabled", "")
 		axios
 			.delete(`/api/links/${props.nome}`, {
 				headers: { authorization: cookie.authorization },
 			})
 			.then(() => {
-				props.onDelete[1]()
+				props.onDeleteFetchLinks()
+				excluirButton.current?.removeAttribute("disabled")
 				showMessageBox(`Link /${props.nome} excluído!`)
 			})
 			.catch((error: AxiosError) => {
-                props.onDelete[1]()
+				props.onDeleteFetchLinks()
+				excluirButton.current?.removeAttribute("disabled")
 				if (error.response?.status == 404) {
 					showMessageBox(`Link /${props.nome} não existe.`, "bg-red-600")
 				} else showMessageBox(`Ocorreu um erro inesperado.`, "bg-red-600")
@@ -35,6 +39,7 @@ function LinkElement(props: {
 		navigator.clipboard.writeText(`https://vnici.us/${props.nome}`)
 		props.onCopy(`Link /${props.nome} copiado!`)
 	}
+
 	return (
 		<li className="space-y-2 lg:space-y-0 lg:space-x-3 flex flex-col lg:flex-row ">
 			<input
@@ -62,7 +67,8 @@ function LinkElement(props: {
 				<button
 					type="button"
 					onClick={deleteLink}
-					className="w-fit lg:w-auto bg-red-600 rounded-lg p-2 border border-red-600 hover:bg-red-600/30 transition-colors ease-in duration-100"
+					className="w-fit lg:w-auto bg-red-600 rounded-lg p-2 border border-red-600 hover:bg-red-600/30 transition-colors ease-in duration-100 disabled:hover:bg-red-600/30 disabled:bg-red-600/30"
+					ref={excluirButton}
 				>
 					excluir
 				</button>

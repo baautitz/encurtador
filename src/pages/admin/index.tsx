@@ -121,14 +121,6 @@ export default function Admin({user}: any) {
 			})
 	}
 
-	const onDeleteRemoveFromLinksList = (name: string) => {
-		setLinkList(linkList.filter((l: { name: any }) => name != l.name))
-	}
-
-	const onDeleteLinkFetchLinks = () => {
-		fetchLinks()
-	}
-
 	return (
 		<div className="box-border flex flex-col  h-screen text-white ">
 			<Head>
@@ -191,7 +183,7 @@ export default function Admin({user}: any) {
 							{loadLinksList(
 								linksLoaded.current,
 								linkList,
-								[onDeleteRemoveFromLinksList, onDeleteLinkFetchLinks],
+								fetchLinks,
 								showMessageBox
 							)}
 						</div>
@@ -207,7 +199,7 @@ export default function Admin({user}: any) {
 function loadLinksList(
 	linksLoaded: boolean,
 	linkList: [{ _id: string; name: string; link: string }] | [],
-	onDelete: any[],
+	onDeleteFetchLinks: any,
 	onCopy: any
 ) {
 	if (linkList == null) {
@@ -235,7 +227,7 @@ function loadLinksList(
 					id={l["_id"]}
 					nome={l.name}
 					link={l.link}
-					onDelete={onDelete}
+					onDeleteFetchLinks={onDeleteFetchLinks}
 					onCopy={onCopy}
 				/>
 			))}
