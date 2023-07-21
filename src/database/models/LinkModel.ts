@@ -4,6 +4,7 @@ type Link = {
 	id: string
 	name: string
 	link: string
+	origin: string
 	author?: string
 	createdAt?: string
 	updatedAt?: string
@@ -21,6 +22,10 @@ const LinkSchema = new Schema<Link>(
 			required: true,
 		},
 		author: String,
+		origin: {
+			type: String,
+			required: true
+		}
 	},
 	{ timestamps: true }
 )

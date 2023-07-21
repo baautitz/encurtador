@@ -101,6 +101,7 @@ export default function Admin({user}: any) {
 				{
 					name: linkNameValue.trim(),
 					link: linkValue,
+					origin: "Painel"
 				},
 				{ headers: { authorization: cookie.authorization } }
 			)

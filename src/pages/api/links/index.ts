@@ -11,9 +11,9 @@ const executeRequest: any = {
 	},
 
 	POST: async (req: NextApiRequest, res: NextApiResponse) => {
-		let { name, link } = req.body
+		let { name, link, origin } = req.body
 
-		if (!name || !link)
+		if (!name || !link || !origin)
 			return res.status(400).json({
 				error: "400 - Bad Request",
 				message: "Name/Link cannot be blank",
@@ -60,7 +60,9 @@ const executeRequest: any = {
 			name = name.match(linkNamePattern) ? name.match(linkNamePattern)[0] : ""
 			name = decodeURI(name)
 
-			const createdLink = await Link.create({ name, link: refinedLinkValue })
+			const author = findedAuthorization.username
+
+			const createdLink = await Link.create({ name, link: refinedLinkValue, author, origin })
 			res.status(201).json({ message: "201 - Created", createdLink })
 		} catch (content: any) {
 			res.status(500).json({ error: "500 - Internal Server Error", content })
