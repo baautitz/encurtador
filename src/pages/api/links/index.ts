@@ -71,7 +71,7 @@ const executeRequest: any = {
 				author,
 				origin,
 			})
-			res.status(201).json({ message: "201 - Created", createdLink })
+			res.status(201).json({ message: "201 - Created", content: createdLink })
 		} catch (content: any) {
 			res.status(500).json({ error: "500 - Internal Server Error", content })
 		}
