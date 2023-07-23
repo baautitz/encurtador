@@ -13,19 +13,6 @@ const executeRequest: any = {
 	POST: async (req: NextApiRequest, res: NextApiResponse) => {
 		let { name, link, origin, author } = req.body
 
-		if (!name || !link || !origin)
-			return res.status(400).json({
-				error: "400 - Bad Request",
-				message: "Name/Link cannot be blank",
-			})
-
-		const findedLink = await LinkRepository.getByName(name)
-		if (findedLink)
-			return res.status(409).json({
-				error: "409 - Conflict",
-				message: `Link '${name}' already exists`,
-			})
-
 		const { authorization } = req.headers
 		if (!authorization) {
 			return res.status(400).json({
@@ -44,8 +31,20 @@ const executeRequest: any = {
 				message: "Invalid authorization",
 			})
 		}
-			
 
+		if (!name || !link || !origin)
+			return res.status(400).json({
+				error: "400 - Bad Request",
+				message: "Name/Link/Origin cannot be blank",
+			})
+
+		const findedLink = await LinkRepository.getByName(name)
+		if (findedLink)
+			return res.status(409).json({
+				error: "409 - Conflict",
+				message: `Link '${name}' already exists`,
+			})
+			
 		try {
 			const linkNamePattern = /[A-Za-z0-9]+([/]{0,1}[A-Za-z0-9-]+)*/g
 
