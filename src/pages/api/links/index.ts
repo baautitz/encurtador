@@ -21,27 +21,30 @@ const executeRequest: any = {
 
 		const findedLink = await LinkRepository.getByName(name)
 		if (findedLink)
-			return res.status(409 ).json({
+			return res.status(409).json({
 				error: "409 - Conflict",
-				message: `Link '${name}' already exists`
+				message: `Link '${name}' already exists`,
 			})
 
 		const { authorization } = req.headers
-		if (!authorization)
+		if (!authorization) {
 			return res.status(400).json({
 				error: "400 - Bad Request",
 				message: "Authorization cannot be blank",
 			})
+		}
 
 		const findedAuthorization = await AuthorizationModel.findOne({
 			authorization,
 		})
 
-		if (!findedAuthorization)
-			return res.status(400).json({
+		if (!findedAuthorization) {
+			return res.status(401).json({
 				error: "401 - Unauthorized",
 				message: "Invalid authorization",
 			})
+		}
+			
 
 		try {
 			const linkNamePattern = /[A-Za-z0-9]+([/]{0,1}[A-Za-z0-9-]+)*/g
@@ -62,7 +65,12 @@ const executeRequest: any = {
 
 			author = !author ? findedAuthorization.username : author
 
-			const createdLink = await Link.create({ name, link: refinedLinkValue, author, origin })
+			const createdLink = await Link.create({
+				name,
+				link: refinedLinkValue,
+				author,
+				origin,
+			})
 			res.status(201).json({ message: "201 - Created", createdLink })
 		} catch (content: any) {
 			res.status(500).json({ error: "500 - Internal Server Error", content })
