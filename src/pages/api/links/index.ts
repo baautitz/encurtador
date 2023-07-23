@@ -11,7 +11,7 @@ const executeRequest: any = {
 	},
 
 	POST: async (req: NextApiRequest, res: NextApiResponse) => {
-		let { name, link, origin } = req.body
+		let { name, link, origin, author } = req.body
 
 		if (!name || !link || !origin)
 			return res.status(400).json({
@@ -60,7 +60,7 @@ const executeRequest: any = {
 			name = name.match(linkNamePattern) ? name.match(linkNamePattern)[0] : ""
 			name = decodeURI(name)
 
-			const author = findedAuthorization.username
+			author = !author ? findedAuthorization.username : author
 
 			const createdLink = await Link.create({ name, link: refinedLinkValue, author, origin })
 			res.status(201).json({ message: "201 - Created", createdLink })
