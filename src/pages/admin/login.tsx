@@ -43,9 +43,8 @@ export default function Login() {
 	}
 
 	const login = () => {
-		const expireDate = new Date()
-
-		expireDate.setFullYear(expireDate.getFullYear() + 1)
+		const cookieExpireDate = new Date()
+		cookieExpireDate.setFullYear(cookieExpireDate.getFullYear() + 1)
 
 		loginButton.current?.setAttribute("disabled", "")
 		setFetchingLogin(true)
@@ -55,7 +54,10 @@ export default function Login() {
 				password: password.current?.value,
 			})
 			.then((res) => {
-				setCookie("authorization", res.data.content.authorization, {expires: expireDate, path: "/"})
+				setCookie("authorization", res.data.content.authorization, {
+					expires: cookieExpireDate,
+					path: "/",
+				})
 				Router.push("/admin")
 			})
 			.catch((e) => {
@@ -132,6 +134,7 @@ export default function Login() {
 							name="user"
 							id="user-input"
 							placeholder="Usuário"
+							autoFocus
 							className="
                             p-2
 
@@ -203,7 +206,11 @@ export default function Login() {
                             duration-100
                         "
 						>
-							{loginButtonText(fetchingLogin)}
+							{fetchingLogin ? (
+								<Loader2 strokeWidth={3} className="animate-spin" />
+							) : (
+								"entrar"
+							)}
 						</button>
 					</div>
 				</form>
@@ -211,10 +218,4 @@ export default function Login() {
 			</div>
 		</div>
 	)
-}
-
-function loginButtonText(fetchingLogin: boolean) {
-	if (fetchingLogin) return <Loader2 strokeWidth={3} className="animate-spin" />
-
-	return "entrar"
 }
