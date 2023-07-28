@@ -93,7 +93,7 @@ export default function Admin({user}: any) {
 		const rg = /[A-Za-z0-9]+([/]{0,1}[A-Za-z0-9-]+)*/g
 
 		linkNameValue = linkNameValue.match(rg) ? linkNameValue.match(rg)[0] : ""
-		if (!linkNameValue.trim() || !linkValue.trim()) return
+		if (!linkValue.trim()) return
 
 		axios
 			.post(

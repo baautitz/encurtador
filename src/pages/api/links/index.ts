@@ -1,5 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next"
 
+import { v4 as uuidv4 } from "uuid"
+
 import Link from "../../../database/models/LinkModel"
 import LinkRepository from "@/repositories/LinkRepository"
 import AuthorizationModel from "@/database/models/AuthorizationModel"
@@ -32,19 +34,31 @@ const executeRequest: any = {
 			})
 		}
 
-		if (!name || !link || !origin)
+		if (!link || !origin) {
 			return res.status(400).json({
 				error: "400 - Bad Request",
-				message: "Name/Link/Origin cannot be blank",
+				message: "Link/Origin cannot be blank",
 			})
+		}
 
-		const findedLink = await LinkRepository.getByName(name)
-		if (findedLink)
+		let findedLink = null
+		let generatedName = null
+		if (!name) {
+			do {
+				generatedName = uuidv4().replaceAll("-", "").substring(0, 7)
+				findedLink = await LinkRepository.getByName(generatedName)
+			} while (findedLink)
+			name = generatedName
+		}
+
+		findedLink = await LinkRepository.getByName(name)
+		if (findedLink) {
 			return res.status(409).json({
 				error: "409 - Conflict",
 				message: `Link '${name}' already exists`,
 			})
-			
+		}
+
 		try {
 			const linkNamePattern = /[A-Za-z0-9]+([/]{0,1}[A-Za-z0-9-]+)*/g
 
