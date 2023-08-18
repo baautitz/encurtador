@@ -6,13 +6,18 @@ function MessageBoxElement() {
     const messageBoxDiv = useRef<HTMLDivElement | null>(null)
     const messageSpan = useRef<HTMLSpanElement | null>(null)
 
-    const [messageBoxAnimationTimeout, setMessageBoxAnimationTimeout] = useState([setTimeout(() => { }), setTimeout(() => { })]);
+    const [messageBoxAnimationTimeout, setMessageBoxAnimationTimeout] = useState([
+        setTimeout(() => { }), 
+        setTimeout(() => { })
+    ]);
+    
     const [messageBoxValue, setMessageBoxValue] = useState('')
 
     showMessageBox = (message: string, backgroundColor?: string) => {
         if (!messageBoxDiv || !messageSpan) return
 
-        messageSpan.current?.classList.forEach((cl: any) => {
+        // reset all background colors
+        messageSpan.current?.classList.forEach((cl: string) => { 
             if (cl.startsWith("bg-")) messageSpan.current?.classList.remove(cl)
         })
                                                
