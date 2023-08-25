@@ -5,9 +5,10 @@ import MessageBoxComponent, {
 	showMessageBox,
 } from "./components/MessageBoxComponent"
 
-import TwitterLogo from "../../public/twitter-logo.svg"
+import XLogo from "../../public/x-logo.svg"
 import InstagramLogo from "../../public/instagram-logo.svg"
 import DiscordLogo from "../../public/discord-logo.svg"
+import SpotifyLogo from '../../public/spotify-logo.svg'
 import GitHubLogo from "../../public/github-logo.svg"
 import PcIcon from "../../public/pc-icon.svg"
 import WavingHandEmoji from "../../public/waving-hand-emoj.svg"
@@ -18,17 +19,17 @@ function socialMedia() {
 		<>
 			<a
 				rel="noopener"
-				href="https://twitter.com/baautitz"
+				href="https://x.com/baautitz"
 				target="_blank"
-				className="w-40 flex items-center p-2 gap-3 border rounded-lg border-sky-600 shadow-[0_0_8px_0_rgba(2,132,199,.5)] hover:bg-sky-600/30 transition-all ease-in duration-100"
+				className="w-40 flex items-center p-2 gap-3 border rounded-lg border-slate-50 shadow-[0_0_8px_0_rgba(255,255,255,.5)] hover:bg-slate-50/30 transition-all ease-in duration-100"
 			>
 				<Image
 					draggable={false}
-					alt="TwitterLogo"
-					src={TwitterLogo}
+					alt="XLogo"
+					src={XLogo}
 					width={30}
 				/>
-				Twitter
+				X / Twitter
 			</a>
 
 			<a
@@ -48,16 +49,6 @@ function socialMedia() {
 
 			<a
 				rel="noopener"
-				href="https://github.com/baautitz"
-				target="_blank"
-				className="w-40 flex items-center p-2 gap-3 border rounded-lg border-zinc-300 shadow-[0_0_6px_0_rgba(212,212,216,.5)] hover:bg-white/30 transition-all ease-in duration-100"
-			>
-				<Image draggable={false} alt="GitHubLogo" src={GitHubLogo} width={30} />
-				GitHub
-			</a>
-
-			<a
-				rel="noopener"
 				href="https://discord.com/users/404867138193457163"
 				target="_blank"
 				className="w-40 flex items-center p-2 gap-3 border rounded-lg border-sky-700 shadow-[0_0_8px_0_rgba(3,105,161,.6)] hover:bg-sky-700/30 transition-all ease-in duration-100"
@@ -69,6 +60,26 @@ function socialMedia() {
 					width={30}
 				/>
 				Discord
+			</a>
+
+			<a
+				rel="noopener"
+				href="https://open.spotify.com/user/vtengaten?si=720bed1f6c3044e2"
+				target="_blank"
+				className="w-40 flex items-center p-2 gap-3 border rounded-lg border-emerald-400 shadow-[0_0_6px_0_rgba(52,211,153,.5)] hover:bg-emerald-400/30 transition-all ease-in duration-100"
+			>
+				<Image draggable={false} alt="SpotifyLogo" src={SpotifyLogo} width={28} />
+				Spotify
+			</a>
+
+			<a
+				rel="noopener"
+				href="https://github.com/baautitz"
+				target="_blank"
+				className="w-40 flex items-center p-2 gap-3 border rounded-lg border-zinc-300 shadow-[0_0_6px_0_rgba(212,212,216,.5)] hover:bg-white/30 transition-all ease-in duration-100"
+			>
+				<Image draggable={false} alt="GitHubLogo" src={GitHubLogo} width={30} />
+				GitHub
 			</a>
 
 			<a
@@ -108,7 +119,7 @@ export default function Home() {
 						</h2>
 					</div>
 
-					<span className="text-neutral-500">Minhas redes socias:</span>
+					<span className="text-neutral-500">Um pouco sobre mim:</span>
 
 					<div className="grid md:grid-cols-2 items-center justify-center gap-2 text-zinc-200">
 						{socialMedia()}
