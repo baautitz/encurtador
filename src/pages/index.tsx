@@ -109,45 +109,47 @@ export async function getServerSideProps() {
 
 export default function Home({ age }: any) {
 	return (
-		<>
-			<Head>
-				<title>Perfil | vnici.us</title>
-			</Head>
+		<div className="h-screen grid">
+			<div className="grid h-full md:p-5 md:place-items-center">
+				<Head>
+					<title>Perfil | vnici.us</title>
+				</Head>
 
-			<div className="grid h-screen place-items-center text-white">
-				<div className="w-full h-full flex flex-col items-center justify-center p-6 gap-3 bg-neutral-950 border border-neutral-800 shadow-[0_0_15px_0_rgba(38,38,38,.5)] md:rounded-lg md:max-w-lg md:h-fit">
-					<div className="flex flex-col items-center gap-1 text-zinc-300">
-						<h1 className="text-5xl font-semibold flex gap-2">
-							Olá!
-							<Image
-								draggable={false}
-								alt="WavingHandEmoji"
-								src={WavingHandEmoji}
-								width={40}
-							/>
-						</h1>
-						<h2 className="text-xl font-semibold text-center">
-							Me chamo Vinicius e tenho {age} anos
-						</h2>
+				<div className="md:grid place-items-center text-white md:w-[700px]">
+					<div className="md:w-full h-full flex flex-col items-center justify-center p-6 gap-3 bg-neutral-950 border border-neutral-800 shadow-[0_0_15px_0_rgba(38,38,38,.5)] md:rounded-lg md:max-w-lg md:h-fit">
+						<div className="flex flex-col items-center gap-1 text-zinc-300">
+							<h1 className="text-5xl font-semibold flex gap-2">
+								Olá!
+								<Image
+									draggable={false}
+									alt="WavingHandEmoji"
+									src={WavingHandEmoji}
+									width={40}
+								/>
+							</h1>
+							<h2 className="text-xl font-semibold text-center">
+								Me chamo Vinicius e tenho {age} anos
+							</h2>
+						</div>
+
+						<span className="text-neutral-500">Um pouco sobre mim:</span>
+
+						<div className="grid md:grid-cols-2 items-center justify-center gap-2 text-zinc-200">
+							{socialMedia()}
+						</div>
+
+						<Image
+							draggable={false}
+							src={Logo}
+							alt="Logo"
+							width={120}
+							className="mt-2"
+						/>
 					</div>
 
-					<span className="text-neutral-500">Um pouco sobre mim:</span>
-
-					<div className="grid md:grid-cols-2 items-center justify-center gap-2 text-zinc-200">
-						{socialMedia()}
-					</div>
-
-					<Image
-						draggable={false}
-						src={Logo}
-						alt="Logo"
-						width={120}
-						className="mt-2"
-					/>
+					<MessageBoxComponent />
 				</div>
-
-				<MessageBoxComponent />
 			</div>
-		</>
+		</div>
 	)
 }
