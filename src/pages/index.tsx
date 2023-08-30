@@ -8,7 +8,7 @@ import MessageBoxComponent, {
 import XLogo from "../../public/x-logo.svg"
 import InstagramLogo from "../../public/instagram-logo.svg"
 import DiscordLogo from "../../public/discord-logo.svg"
-import SpotifyLogo from '../../public/spotify-logo.svg'
+import SpotifyLogo from "../../public/spotify-logo.svg"
 import GitHubLogo from "../../public/github-logo.svg"
 import PcIcon from "../../public/pc-icon.svg"
 import WavingHandEmoji from "../../public/waving-hand-emoj.svg"
@@ -23,13 +23,8 @@ function socialMedia() {
 				target="_blank"
 				className="w-40 flex items-center p-2 gap-3 border rounded-lg border-slate-50 shadow-[0_0_8px_0_rgba(255,255,255,.5)] hover:bg-slate-50/30 transition-all ease-in duration-100"
 			>
-				<Image
-					draggable={false}
-					alt="XLogo"
-					src={XLogo}
-					width={30}
-				/>
-				X / Twitter
+				<Image draggable={false} alt="XLogo" src={XLogo} width={30} />X /
+				Twitter
 			</a>
 
 			<a
@@ -68,7 +63,12 @@ function socialMedia() {
 				target="_blank"
 				className="w-40 flex items-center p-2 gap-3 border rounded-lg border-emerald-400 shadow-[0_0_6px_0_rgba(52,211,153,.5)] hover:bg-emerald-400/30 transition-all ease-in duration-100"
 			>
-				<Image draggable={false} alt="SpotifyLogo" src={SpotifyLogo} width={28} />
+				<Image
+					draggable={false}
+					alt="SpotifyLogo"
+					src={SpotifyLogo}
+					width={28}
+				/>
 				Spotify
 			</a>
 
@@ -95,7 +95,19 @@ function socialMedia() {
 	)
 }
 
-export default function Home() {
+export async function getServerSideProps() {
+	const currentYear = new Date().getFullYear()
+	const birthYear = new Date("2004-08-27").getFullYear()
+
+	const age = currentYear - birthYear
+	return {
+		props: {
+			age,
+		},
+	}
+}
+
+export default function Home({ age }: any) {
 	return (
 		<>
 			<Head>
@@ -104,7 +116,7 @@ export default function Home() {
 
 			<div className="grid h-screen place-items-center text-white">
 				<div className="w-full h-full flex flex-col items-center justify-center p-6 gap-3 bg-neutral-950 border border-neutral-800 shadow-[0_0_15px_0_rgba(38,38,38,.5)] md:rounded-lg md:max-w-lg md:h-fit">
-				<div className="flex flex-col items-center gap-1 text-zinc-300">
+					<div className="flex flex-col items-center gap-1 text-zinc-300">
 						<h1 className="text-5xl font-semibold flex gap-2">
 							Olá!
 							<Image
@@ -115,7 +127,7 @@ export default function Home() {
 							/>
 						</h1>
 						<h2 className="text-xl font-semibold text-center">
-							Me chamo Vinicius e tenho 18 anos
+							Me chamo Vinicius e tenho {age} anos
 						</h2>
 					</div>
 
