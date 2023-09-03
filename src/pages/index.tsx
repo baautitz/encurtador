@@ -59,21 +59,6 @@ function socialMedia() {
 
 			<a
 				rel="noopener"
-				href="https://open.spotify.com/user/vtengaten?si=720bed1f6c3044e2"
-				target="_blank"
-				className="w-40 flex items-center p-2 gap-3 border rounded-lg border-emerald-400 shadow-[0_0_6px_0_rgba(52,211,153,.5)] hover:bg-emerald-400/30 transition-all ease-in duration-100"
-			>
-				<Image
-					draggable={false}
-					alt="SpotifyLogo"
-					src={SpotifyLogo}
-					width={28}
-				/>
-				Spotify
-			</a>
-
-			<a
-				rel="noopener"
 				href="https://github.com/baautitz"
 				target="_blank"
 				className="w-40 flex items-center p-2 gap-3 border rounded-lg border-zinc-300 shadow-[0_0_6px_0_rgba(212,212,216,.5)] hover:bg-white/30 transition-all ease-in duration-100"
