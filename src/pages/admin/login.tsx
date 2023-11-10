@@ -1,23 +1,21 @@
-import Head from "next/head"
-import Link from "next/link"
-import axios from "axios"
-import Router from "next/router"
+import Head from "next/head";
+import Link from "next/link";
+import axios from "axios";
+import Router from "next/router";
 
-import { useCookies } from "react-cookie"
-import { useEffect, useRef, useState } from "react"
+import { useCookies } from "react-cookie";
+import { useEffect, useRef, useState } from "react";
 
-import Logo from "../../../public/logo-big-name.svg"
-import Image from "next/image"
+import Logo from "../../../public/logo-big-name.svg";
+import Image from "next/image";
 
-import MessageBoxComponent, {
-	showMessageBox,
-} from "@/pages/components/MessageBoxComponent"
-import dbConnection from "@/database/DbConnection"
-import { Loader2 } from "lucide-react"
+import MessageBoxComponent, { showMessageBox } from "@/components/MessageBoxComponent";
+import dbConnection from "@/database/DbConnection";
+import { Loader2 } from "lucide-react";
 
 export async function getServerSideProps(context: any) {
-	dbConnection()
-	const authorizationCookie = context.req.cookies["authorization"]
+	dbConnection();
+	const authorizationCookie = context.req.cookies["authorization"];
 
 	if (authorizationCookie)
 		return {
@@ -25,29 +23,29 @@ export async function getServerSideProps(context: any) {
 				permanent: false,
 				destination: "/admin",
 			},
-		}
+		};
 
-	return { props: {} }
+	return { props: {} };
 }
 
 export default function Login() {
-	const username = useRef<HTMLInputElement>(null)
-	const password = useRef<HTMLInputElement>(null)
-	const loginButton = useRef<HTMLButtonElement>(null)
+	const username = useRef<HTMLInputElement>(null);
+	const password = useRef<HTMLInputElement>(null);
+	const loginButton = useRef<HTMLButtonElement>(null);
 
-	const [fetchingLogin, setFetchingLogin] = useState(false)
-	const [cookies, setCookie, removeCookie] = useCookies(["authorization"])
+	const [fetchingLogin, setFetchingLogin] = useState(false);
+	const [cookies, setCookie, removeCookie] = useCookies(["authorization"]);
 
 	const enterLogin = (e: any) => {
-		if (e.key == "Enter") login()
-	}
+		if (e.key == "Enter") login();
+	};
 
 	const login = () => {
-		const cookieExpireDate = new Date()
-		cookieExpireDate.setFullYear(cookieExpireDate.getFullYear() + 1)
+		const cookieExpireDate = new Date();
+		cookieExpireDate.setFullYear(cookieExpireDate.getFullYear() + 1);
 
-		loginButton.current?.setAttribute("disabled", "")
-		setFetchingLogin(true)
+		loginButton.current?.setAttribute("disabled", "");
+		setFetchingLogin(true);
 		axios
 			.post("/api/auth/", {
 				username: username.current?.value,
@@ -57,19 +55,19 @@ export default function Login() {
 				setCookie("authorization", res.data.content.authorization, {
 					expires: cookieExpireDate,
 					path: "/",
-				})
-				Router.push("/admin")
+				});
+				Router.push("/admin");
 			})
 			.catch((e) => {
-				loginButton.current?.removeAttribute("disabled")
-				setFetchingLogin(false)
+				loginButton.current?.removeAttribute("disabled");
+				setFetchingLogin(false);
 				if (e.response.status == 401) {
-					showMessageBox("Usuário e/ou senha inválido(s)", "bg-red-600")
+					showMessageBox("Usuário e/ou senha inválido(s)", "bg-red-600");
 				} else if (e.response.status == 400) {
-					showMessageBox("Usuário e/ou senha inválido(s)", "bg-red-600")
-				} else showMessageBox("Ocorreu um erro ao efetuar login", "bg-red-600")
-			})
-	}
+					showMessageBox("Usuário e/ou senha inválido(s)", "bg-red-600");
+				} else showMessageBox("Ocorreu um erro ao efetuar login", "bg-red-600");
+			});
+	};
 
 	return (
 		<div
@@ -122,9 +120,7 @@ export default function Login() {
 				>
 					<div className="flex flex-col items-center gap-3">
 						<h1 className="text-5xl font-bold">login</h1>
-						<h2 className="text-xl text-neutral-500">
-							Insira seus dados para continuar
-						</h2>
+						<h2 className="text-xl text-neutral-500">Insira seus dados para continuar</h2>
 					</div>
 					<div className="flex flex-col space-y-2 w-full">
 						<input
@@ -206,16 +202,12 @@ export default function Login() {
                             duration-100
                         "
 						>
-							{fetchingLogin ? (
-								<Loader2 strokeWidth={3} className="animate-spin" />
-							) : (
-								"entrar"
-							)}
+							{fetchingLogin ? <Loader2 strokeWidth={3} className="animate-spin" /> : "entrar"}
 						</button>
 					</div>
 				</form>
 				<MessageBoxComponent />
 			</div>
 		</div>
-	)
+	);
 }

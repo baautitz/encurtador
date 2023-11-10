@@ -1,24 +1,22 @@
-import Head from "next/head"
-import axios, { AxiosError } from "axios"
-import { useEffect, useRef, useState } from "react"
+import Head from "next/head";
+import axios, { AxiosError } from "axios";
+import { useEffect, useRef, useState } from "react";
 
-import { CopySlash, Loader2 } from "lucide-react"
+import { CopySlash, Loader2 } from "lucide-react";
 
-import LinkComponent from "../components/LinkComponent"
-import HeaderbarComponent from "../components/HeaderBarComponent"
-import MessageBoxComponent, {
-	showMessageBox,
-} from "../components/MessageBoxComponent"
-import AuthorizationModel from "@/database/models/AuthorizationModel"
-import dbConnection from "@/database/DbConnection"
-import { useCookies } from "react-cookie"
-import UserModel from "@/database/models/UserModel"
-import { InferGetServerSidePropsType } from "next"
+import LinkComponent from "../../components/LinkComponent";
+import HeaderbarComponent from "../../components/HeaderBarComponent";
+import MessageBoxComponent, { showMessageBox } from "../../components/MessageBoxComponent";
+import AuthorizationModel from "@/database/models/AuthorizationModel";
+import dbConnection from "@/database/DbConnection";
+import { useCookies } from "react-cookie";
+import UserModel from "@/database/models/UserModel";
+import { InferGetServerSidePropsType } from "next";
 
 export async function getServerSideProps(context: any) {
-	dbConnection()
+	dbConnection();
 
-	const authorizationCookie = context.req.cookies["authorization"]
+	const authorizationCookie = context.req.cookies["authorization"];
 
 	if (!authorizationCookie)
 		return {
@@ -26,31 +24,28 @@ export async function getServerSideProps(context: any) {
 				permanent: false,
 				destination: "/admin/login",
 			},
-		}
+		};
 
 	const findedAuthorization = await AuthorizationModel.findOne({
 		authorization: authorizationCookie,
-	})
+	});
 
 	if (!findedAuthorization) {
-		context.res.setHeader(
-			"Set-Cookie",
-			"authorization=invalidAuthorization; Max-Age=0"
-		)
+		context.res.setHeader("Set-Cookie", "authorization=invalidAuthorization; Max-Age=0");
 
 		return {
 			redirect: {
 				permanent: false,
 				destination: "/admin/login",
 			},
-		}
+		};
 	}
 
 	const findedUser = await UserModel.findOne({
 		username: findedAuthorization.username,
-	}).select("-password")
+	}).select("-password");
 
-	if (!findedUser) return { props: {} }	
+	if (!findedUser) return { props: {} };
 	return {
 		props: {
 			user: {
@@ -58,42 +53,42 @@ export async function getServerSideProps(context: any) {
 				fullName: findedUser.fullName,
 			},
 		},
-	}
+	};
 }
 
-export default function Admin({user}: any) {
-	const [linkList, setLinkList] = useState<any>([])
-	let linksLoaded = useRef(false)
+export default function Admin({ user }: any) {
+	const [linkList, setLinkList] = useState<any>([]);
+	let linksLoaded = useRef(false);
 
-	const [cookie, setCookie] = useCookies(["authorization"])
+	const [cookie, setCookie] = useCookies(["authorization"]);
 
-	const linkNameInput = useRef<any>(null)
-	const linkInput = useRef<any>(null)
+	const linkNameInput = useRef<any>(null);
+	const linkInput = useRef<any>(null);
 	useEffect(() => {
 		if (!linksLoaded.current) {
-			fetchLinks()
-			linksLoaded.current = true
+			fetchLinks();
+			linksLoaded.current = true;
 		}
-	}, [])
+	}, []);
 
 	const fetchLinks = () => {
 		axios("/api/links").then((res) => {
-			setLinkList(res.data)
-		})
-	}
+			setLinkList(res.data);
+		});
+	};
 
 	const createLinkFromInput = (e: any) => {
-		if (e.key == "Enter") createLink()
-	}
+		if (e.key == "Enter") createLink();
+	};
 
 	const createLink = () => {
-		let linkNameValue = linkNameInput.current.value
-		const linkValue = linkInput.current.value
+		let linkNameValue = linkNameInput.current.value;
+		const linkValue = linkInput.current.value;
 
-		const rg = /[A-Za-z0-9]+([/]{0,1}[A-Za-z0-9-]+)*/g
+		const rg = /[A-Za-z0-9]+([/]{0,1}[A-Za-z0-9-]+)*/g;
 
-		linkNameValue = linkNameValue.match(rg) ? linkNameValue.match(rg)[0] : ""
-		if (!linkValue.trim()) return
+		linkNameValue = linkNameValue.match(rg) ? linkNameValue.match(rg)[0] : "";
+		if (!linkValue.trim()) return;
 
 		axios
 			.post(
@@ -101,25 +96,22 @@ export default function Admin({user}: any) {
 				{
 					name: linkNameValue.trim(),
 					link: linkValue,
-					origin: "Painel"
+					origin: "Painel",
 				},
 				{ headers: { authorization: cookie.authorization } }
 			)
 			.then(() => {
-				fetchLinks()
-				showMessageBox(`Link /${linkNameValue.trim()} criado!`)
-				linkNameInput.current.value = ""
-				linkInput.current.value = ""
+				fetchLinks();
+				showMessageBox(`Link /${linkNameValue.trim()} criado!`);
+				linkNameInput.current.value = "";
+				linkInput.current.value = "";
 			})
 			.catch((error: AxiosError) => {
 				if (error.response?.status == 409) {
-					showMessageBox(
-						`Link /${linkNameValue.trim()} já existe.`,
-						"bg-red-600"
-					)
-				} else showMessageBox(`Ocorreu um erro inesperado.`, "bg-red-600")
-			})
-	}
+					showMessageBox(`Link /${linkNameValue.trim()} já existe.`, "bg-red-600");
+				} else showMessageBox(`Ocorreu um erro inesperado.`, "bg-red-600");
+			});
+	};
 
 	return (
 		<div className="box-border flex flex-col  h-screen text-white ">
@@ -129,10 +121,7 @@ export default function Admin({user}: any) {
 
 			<HeaderbarComponent fullName={user?.fullName.split(" ")[0]} pageName="links" />
 
-			<div
-				id="main-container"
-				className="flex-auto lg:px-6 flex flex-col bg-black overflow-y-auto"
-			>
+			<div id="main-container" className="flex-auto lg:px-6 flex flex-col bg-black overflow-y-auto">
 				<div className="flex-auto flex flex-col justify-center items-center lg:min-w-[600px] min-h-[600px] lg:space-y-3">
 					<div
 						id="links-container"
@@ -140,10 +129,7 @@ export default function Admin({user}: any) {
 					>
 						<span className="text-5xl font-bold text-center">editar links</span>
 
-						<form
-							id="links-add"
-							className="space-y-2 lg:space-y-0 lg:space-x-3 flex flex-col lg:flex-row"
-						>
+						<form id="links-add" className="space-y-2 lg:space-y-0 lg:space-x-3 flex flex-col lg:flex-row">
 							<input
 								type="text"
 								ref={linkNameInput}
@@ -176,16 +162,8 @@ export default function Admin({user}: any) {
 							</button>
 						</form>
 
-						<div
-							id="links-list"
-							className="flex-auto w-full overflow-y-scroll pr-3"
-						>
-							{loadLinksList(
-								linksLoaded.current,
-								linkList,
-								fetchLinks,
-								showMessageBox
-							)}
+						<div id="links-list" className="flex-auto w-full overflow-y-scroll pr-3">
+							{loadLinksList(linksLoaded.current, linkList, fetchLinks, showMessageBox)}
 						</div>
 					</div>
 
@@ -193,21 +171,16 @@ export default function Admin({user}: any) {
 				</div>
 			</div>
 		</div>
-	)
+	);
 }
 
-function loadLinksList(
-	linksLoaded: boolean,
-	linkList: [{ _id: string; name: string; link: string }] | [],
-	onDeleteFetchLinks: any,
-	onCopy: any
-) {
+function loadLinksList(linksLoaded: boolean, linkList: [{ _id: string; name: string; link: string }] | [], onDeleteFetchLinks: any, onCopy: any) {
 	if (linkList == null) {
 		return (
 			<div className="h-full w-full flex justify-center items-center gap-3">
 				<span>Não foi possível encontrar nennhum link :(</span>
 			</div>
-		)
+		);
 	}
 
 	if (!linksLoaded || linkList.length == 0) {
@@ -216,21 +189,14 @@ function loadLinksList(
 				<Loader2 strokeWidth={3} className="animate-spin" />
 				<span>Carregando...</span>
 			</div>
-		)
+		);
 	}
 
 	return (
 		<ul className="space-y-5 lg:space-y-3">
 			{linkList.map((l) => (
-				<LinkComponent
-					key={l.name}
-					id={l["_id"]}
-					nome={l.name}
-					link={l.link}
-					onDeleteFetchLinks={onDeleteFetchLinks}
-					onCopy={onCopy}
-				/>
+				<LinkComponent key={l.name} id={l["_id"]} nome={l.name} link={l.link} onDeleteFetchLinks={onDeleteFetchLinks} onCopy={onCopy} />
 			))}
 		</ul>
-	)
+	);
 }
