@@ -84,7 +84,7 @@ export default function Login() {
         "
 		>
 			<Head>
-				<title>Login | vnici.us</title>
+				<title>Login ● vnici.us</title>
 			</Head>
 			<div
 				className="

@@ -116,7 +116,7 @@ export default function Admin({ user }: any) {
 	return (
 		<div className="box-border flex flex-col  h-screen text-white ">
 			<Head>
-				<title>Admin | vnici.us</title>
+				<title>Admin ● vnici.us</title>
 			</Head>
 
 			<HeaderbarComponent fullName={user?.fullName.split(" ")[0]} pageName="links" />
