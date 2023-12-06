@@ -72,7 +72,7 @@ export default function Home({ age }: any) {
 		<div className="h-screen grid">
 			<div className="grid h-full md:p-5 md:place-items-center">
 				<Head>
-					<title>Perfil ● vnici.us</title>
+					<title>Perfil • vnici.us</title>
 				</Head>
 
 				<div className="md:grid place-items-center text-white md:w-[700px]">
