@@ -56,10 +56,17 @@ function socialMedia() {
 }
 
 export async function getServerSideProps() {
-	const currentYear = new Date().getFullYear();
-	const birthYear = new Date("2004-08-27").getFullYear();
+	let todayDate = new Date()
+	todayDate.setHours(0, 0, 0)
 
-	const age = currentYear - birthYear;
+	let birthdayDate = new Date("2004-08-27")
+	birthdayDate.setHours(0, 0, 0)
+
+	let age = todayDate.getFullYear() - birthdayDate.getFullYear()
+	if (todayDate.getMonth() < birthdayDate.getMonth() || todayDate.getDate() < birthdayDate.getDate()) {
+  		age -= 1
+	}
+	
 	return {
 		props: {
 			age,
