@@ -3,7 +3,7 @@ import Head from "next/head";
 
 import MessageBoxComponent, { showMessageBox } from "../components/MessageBoxComponent";
 
-import XLogo from "../../public/x-logo.svg";
+import BlueskyLogo from "../../public/bluesky-logo.svg";
 import InstagramLogo from "../../public/instagram-logo.svg";
 import DiscordLogo from "../../public/discord-logo.svg";
 import GitHubLogo from "../../public/github-logo.svg";
@@ -15,11 +15,11 @@ function socialMedia() {
 		<>
 			<a
 				rel="noopener"
-				href="https://x.com/baautitz"
+				href="https://bsky.app/profile/vnici.us"
 				target="_blank"
-				className="w-40 flex items-center p-2 gap-3 border rounded-lg border-slate-50 shadow-[0_0_8px_0_rgba(255,255,255,.5)] hover:bg-slate-50/30 transition-all ease-in duration-100"
+				className="w-40 flex items-center p-2 gap-3 border rounded-lg border-[rgba(0,133,255,.5)] shadow-[0_0_8px_0_rgba(0,133,255,.5)] hover:bg-[rgba(0,133,255,.5)]/30 transition-all ease-in duration-100"
 			>
-				<Image draggable={false} alt="XLogo" src={XLogo} width={30} />X / Twitter
+				<Image draggable={false} alt="BlueskyLogo" src={BlueskyLogo} width={30} />Bluesky
 			</a>
 
 			<a
@@ -64,9 +64,9 @@ export async function getServerSideProps() {
 
 	let age = todayDate.getFullYear() - birthdayDate.getFullYear()
 	if (todayDate.getMonth() < birthdayDate.getMonth() || todayDate.getDate() < birthdayDate.getDate()) {
-  		age -= 1
+		age -= 1
 	}
-	
+
 	return {
 		props: {
 			age,
