@@ -5,7 +5,7 @@ import MessageBoxComponent, {
   showMessageBox,
 } from "../components/MessageBoxComponent";
 
-import BlueskyLogo from "../../public/bluesky-logo.svg";
+import XLogo from "../../public/x-logo.svg";
 import InstagramLogo from "../../public/instagram-logo.svg";
 import DiscordLogo from "../../public/discord-logo.svg";
 import GitHubLogo from "../../public/github-logo.svg";
@@ -17,17 +17,12 @@ function socialMedia() {
     <>
       <a
         rel="noopener"
-        href="https://bsky.app/profile/vnici.us"
+        href="https://x.com/baautitz"
         target="_blank"
-        className="w-40 flex items-center p-2 gap-3 border rounded-lg border-[rgba(0,133,255,.5)] shadow-[0_0_8px_0_rgba(0,133,255,.5)] hover:bg-[rgba(0,133,255,.5)]/30 transition-all ease-in duration-100"
+        className="w-40 flex items-center p-2 gap-3 border rounded-lg border-zinc-300 shadow-[0_0_6px_0_rgba(212,212,216,.5)] hover:bg-white/30 transition-all ease-in duration-100"
       >
-        <Image
-          draggable={false}
-          alt="BlueskyLogo"
-          src={BlueskyLogo}
-          width={30}
-        />
-        Bluesky
+        <Image draggable={false} alt="XLogo" src={XLogo} width={30} />X /
+        Twitter
       </a>
 
       <a
